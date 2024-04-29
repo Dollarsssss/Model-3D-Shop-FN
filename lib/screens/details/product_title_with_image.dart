@@ -46,7 +46,7 @@ class ProductTitleWithImage extends StatelessWidget {
               ]
             )
             ),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
               Expanded(child: 
                 SizedBox(
                   width: 300,

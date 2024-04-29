@@ -28,7 +28,7 @@ List<Product> products = [
       size: 8,
       description: dummyText,
       image: "assets/images/Shiba.png",
-      color: Color(0xFFD3A984),
+      color: const Color(0xFFD3A984),
       quality: "Moderate",
       model: "assets/models/shiba.glb"
     ),
@@ -41,7 +41,7 @@ List<Product> products = [
       size: 14,
       description: dummyText,
       image: "assets/images/Sylvanian Persian Cat.png",
-      color: Color(0xFFEcd2d3),
+      color: const Color(0xFFEcd2d3),
       quality: "Amazing",
       model: "assets/models/sylvanian_persian_cat.glb"
       ),
@@ -52,7 +52,7 @@ List<Product> products = [
       size: 10,
       description: dummyText,
       image: "assets/images/Felix The Cat.png",
-      color: Color(0xFF989493),
+      color: const Color(0xFF989493),
       quality: "Moderate",
       model: "assets/models/felix_the_cat.glb"
       ),
@@ -63,7 +63,7 @@ List<Product> products = [
       size: 10,
       description: dummyText,
       image: "assets/images/Old Car.png",
-      color: Color(0xFFD3A984),
+      color: const Color(0xFFD3A984),
       quality: "Genaral",
       model: "assets/models/pony_cartoon.glb"
       ),
@@ -74,7 +74,7 @@ List<Product> products = [
       size: 8,
       description: dummyText,
       image: "assets/images/Stylized Mangrove Greenhouse.png",
-      color: Color(0xFFFB7883),
+      color: const Color(0xFFFB7883),
       quality: "Amazing",
       model: "assets/models/stylized_mangrove_greenhouse.glb"
       ),
@@ -85,7 +85,7 @@ List<Product> products = [
     size: 12,
     description: dummyText,
     image: "assets/images/Just a girl.png",
-    color: Color(0xFF67526f),
+    color: const Color(0xFF67526f),
     quality: "Amazing",
     model: "assets/models/just_a_girl.glb"
   ),

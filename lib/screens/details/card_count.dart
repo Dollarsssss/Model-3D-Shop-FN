@@ -23,7 +23,7 @@ class _CartCountState extends State<CartCount> {
         }),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Text(numberItem.toString().padLeft(2,"0"),style: TextStyle(fontSize: 28),),
+          child: Text(numberItem.toString().padLeft(2,"0"),style: const TextStyle(fontSize: 28),),
         ),
         buildOutlineButton(icon: Icons.add,press: (){
           setState(() {

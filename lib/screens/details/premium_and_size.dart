@@ -19,7 +19,7 @@ class PremiumAndSize extends StatelessWidget {
             style: const TextStyle(color:Colors.black),
             children: [
             const TextSpan(text: "Premium Quality\n"),
-            TextSpan(text: "${product.quality }",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold))
+            TextSpan(text: "${product.quality }",style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold))
           ])),
         ),
         Expanded(
@@ -27,7 +27,7 @@ class PremiumAndSize extends StatelessWidget {
             style: const TextStyle(color:Colors.black),
             children: [
             const TextSpan(text: "Size\n"),
-            TextSpan(text: "${product.size } cm",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold))
+            TextSpan(text: "${product.size } cm",style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold))
           ])),
         )
       ],

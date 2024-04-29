@@ -29,7 +29,7 @@ class ProFilePic extends StatelessWidget {
                   child: TextButton(
                     style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
-                    backgroundColor: Color(0xFFF5F6F9),
+                    backgroundColor: const Color(0xFFF5F6F9),
                   ),
                     onPressed: (){}, 
                     child: SvgPicture.asset("assets/icons/Camera Icon.svg")),

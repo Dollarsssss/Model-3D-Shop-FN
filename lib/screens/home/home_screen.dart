@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/components/bottom_nav.dart';
+import 'package:flutter_ecommerce/enums.dart';
 import 'package:flutter_ecommerce/screens/home/home_form.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -27,6 +29,7 @@ class Home extends StatelessWidget {
         padding:EdgeInsets.only(bottom: 20),
         child: HomeForm(),
       ),
+      bottomNavigationBar:const BottomNav(selectedMenu: MenuState.home),
     );
   }
 }
