@@ -6,6 +6,7 @@ import 'package:flutter_ecommerce/components/defualt_button.dart';
 import 'package:flutter_ecommerce/components/form_error.dart';
 import 'package:flutter_ecommerce/constants.dart';
 import 'package:flutter_ecommerce/screens/home/home_screen.dart';
+import 'package:lottie/lottie.dart';
 
 class SingInForm extends StatefulWidget {
   const SingInForm({super.key});
@@ -21,62 +22,79 @@ class _SingInFormState extends State<SingInForm> {
   bool remember = false;
   final List<String> errors = [];
 
-    Future<void> _login() async {
+  Future<void> _login() async {
     final url = Uri.parse('http://192.168.1.9:3000/login');
     final headers = {'Content-Type': 'application/json'};
-    final body = jsonEncode({
-      'email': _email.text,
-      'password': _password.text
-    });
+    final body = jsonEncode({'email': _email.text, 'password': _password.text});
 
     final res = await http.post(url, headers: headers, body: body);
-   
-    // final jsonRes = jsonDecode(res.body);
-    // print("Hello");
-      if (res.statusCode == 200) { 
-        print("Hello I SUS");
-       Navigator.pushNamed(context, Home.routeName); 
+
+    if (res.statusCode == 200) {
+      // ignore: use_build_context_synchronously
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Success'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Lottie.asset("assets/animations/login_success.json"),
+                  const Text('May you have a good experience using the Application.'),
+                ],
+              ),
+            );
+          });
+      Future.delayed(Duration(seconds: 3), () {
+        // ปิด dialog
+        Navigator.of(context).pop();
+        // ไปหน้าถัดไป
+        Navigator.pushNamed(context, Home.routeName);
+      });
     } else {
-    // ignore: use_build_context_synchronously
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Error'),
-          content: const Text('Email or password is incorrect.'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      }
-    );
-  }
-}
-
-  
-
-  void addError({required String error}){
-    if (!errors.contains(error)){
-    setState(() {
-      errors.add(error);
-    });
+      // ignore: use_build_context_synchronously
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text(
+                'Error',
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Lottie.asset("assets/animations/login_error.json"),
+                  const Text('Email or password is incorrect.'),
+                ],
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('Close'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
     }
   }
 
-  void removeError({required String error}){
-    if(errors.contains(error)){
+  void addError({required String error}) {
+    if (!errors.contains(error)) {
+      setState(() {
+        errors.add(error);
+      });
+    }
+  }
+
+  void removeError({required String error}) {
+    if (errors.contains(error)) {
       setState(() {
         errors.remove(error);
       });
     }
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +110,7 @@ class _SingInFormState extends State<SingInForm> {
               children: [
                 Checkbox(
                   value: remember,
-                  activeColor: kPrimaryColor, 
+                  activeColor: kPrimaryColor,
                   checkColor: Colors.white,
                   onChanged: (value) {
                     setState(() {
@@ -102,7 +120,12 @@ class _SingInFormState extends State<SingInForm> {
                 ),
                 const Text("Remember me"),
                 const Spacer(),
-                const Text("Forget Password" ,style: TextStyle(decoration: TextDecoration.underline,color: kPrimaryColor),)
+                const Text(
+                  "Forget Password",
+                  style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: kPrimaryColor),
+                )
               ],
             ),
             FormError(errors: errors),
@@ -111,11 +134,13 @@ class _SingInFormState extends State<SingInForm> {
               text: "Continue",
               press: () {
                 if (_formkey.currentState!.validate()) {
-                   _formkey.currentState!.save();
-                   print("True : Email is $_email and this is $_password");
-                   _login();
+                  _formkey.currentState!.save();
+                  print("True : Email is $_email and this is $_password");
+                  _login();
                   //  Navigator.pushNamed(context, Home.routeName);
-                }else{print("Fasle : Email is $_email and this is $_password");}
+                } else {
+                  print("Fasle : Email is $_email and this is $_password");
+                }
               },
             )
           ],
@@ -128,23 +153,21 @@ class _SingInFormState extends State<SingInForm> {
       obscureText: true,
       //onSaved:(newValue) => _password = newValue as String,
       onChanged: (value) {
-          if (value.isNotEmpty && errors.contains(kPassNullError)) {
-             removeError(error: kPassNullError);
-        }else if (value.length >= 8 && errors.contains(kShortPassError)) {
-             removeError(error: kShortPassError);
+        if (value.isNotEmpty && errors.contains(kPassNullError)) {
+          removeError(error: kPassNullError);
+        } else if (value.length >= 8 && errors.contains(kShortPassError)) {
+          removeError(error: kShortPassError);
         }
         return null;
-        
       },
       validator: (value) {
         if (value!.isEmpty && !errors.contains(kPassNullError)) {
-             addError(error: kPassNullError);
-             
-        }else if (value.length < 8 && !errors.contains(kShortPassError)) {
-             addError(error: kShortPassError);
-             
-        } if (errors.isNotEmpty) {
-        return "";
+          addError(error: kPassNullError);
+        } else if (value.length < 8 && !errors.contains(kShortPassError)) {
+          addError(error: kShortPassError);
+        }
+        if (errors.isNotEmpty) {
+          return "";
         }
         return null;
       },
@@ -162,20 +185,21 @@ class _SingInFormState extends State<SingInForm> {
       //onSaved: (newValue) => _email = newValue as String,
       onChanged: (value) {
         if (value.isNotEmpty && errors.contains(kEmailNullError)) {
-            removeError(error: kEmailNullError);
-        } else if (emailValidatorRegExp.hasMatch(value) && errors.contains(kInvalidEmailError)) {
-            removeError(error: kInvalidEmailError);
+          removeError(error: kEmailNullError);
+        } else if (emailValidatorRegExp.hasMatch(value) &&
+            errors.contains(kInvalidEmailError)) {
+          removeError(error: kInvalidEmailError);
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty && !errors.contains(kEmailNullError)) {
-            addError(error: kEmailNullError);
-            
-        } else if (!emailValidatorRegExp.hasMatch(value) && !errors.contains(kInvalidEmailError)) {
-            addError(error: kInvalidEmailError);
-            
-        } if (errors.isNotEmpty) {
+          addError(error: kEmailNullError);
+        } else if (!emailValidatorRegExp.hasMatch(value) &&
+            !errors.contains(kInvalidEmailError)) {
+          addError(error: kInvalidEmailError);
+        }
+        if (errors.isNotEmpty) {
           return "";
         }
         return null;
