@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/custom_suffix.icon.dart';
 import 'package:flutter_ecommerce/components/defualt_button.dart';
@@ -14,10 +16,48 @@ class SingInForm extends StatefulWidget {
 
 class _SingInFormState extends State<SingInForm> {
   final _formkey = GlobalKey<FormState>();
-  String email = "";
-  String password= "";
+  final _email = TextEditingController();
+  final _password = TextEditingController();
   bool remember = false;
   final List<String> errors = [];
+
+    Future<void> _login() async {
+    final url = Uri.parse('http://192.168.1.9:3000/login');
+    final headers = {'Content-Type': 'application/json'};
+    final body = jsonEncode({
+      'email': _email.text,
+      'password': _password.text
+    });
+
+    final res = await http.post(url, headers: headers, body: body);
+   
+    // final jsonRes = jsonDecode(res.body);
+    // print("Hello");
+      if (res.statusCode == 200) { 
+        print("Hello I SUS");
+       Navigator.pushNamed(context, Home.routeName); 
+    } else {
+    // ignore: use_build_context_synchronously
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Email or password is incorrect.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      }
+    );
+  }
+}
+
   
 
   void addError({required String error}){
@@ -72,9 +112,10 @@ class _SingInFormState extends State<SingInForm> {
               press: () {
                 if (_formkey.currentState!.validate()) {
                    _formkey.currentState!.save();
-                   print("True : Email is $email and this is $password");
-                   Navigator.pushNamed(context, Home.routeName);
-                }else{print("Fasle : Email is $email and this is $password");}
+                   print("True : Email is $_email and this is $_password");
+                   _login();
+                  //  Navigator.pushNamed(context, Home.routeName);
+                }else{print("Fasle : Email is $_email and this is $_password");}
               },
             )
           ],
@@ -83,8 +124,9 @@ class _SingInFormState extends State<SingInForm> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
+      controller: _password,
       obscureText: true,
-      onSaved:(newValue) => password = newValue as String,
+      //onSaved:(newValue) => _password = newValue as String,
       onChanged: (value) {
           if (value.isNotEmpty && errors.contains(kPassNullError)) {
              removeError(error: kPassNullError);
@@ -116,7 +158,8 @@ class _SingInFormState extends State<SingInForm> {
   TextFormField buildEmailFormField() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
-      onSaved: (newValue) => email = newValue as String,
+      controller: _email,
+      //onSaved: (newValue) => _email = newValue as String,
       onChanged: (value) {
         if (value.isNotEmpty && errors.contains(kEmailNullError)) {
             removeError(error: kEmailNullError);
