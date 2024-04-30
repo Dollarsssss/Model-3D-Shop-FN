@@ -27,6 +27,7 @@ const String kMatchPassError = "Passwords don't match";
 const String kFirstNameNullError = "Please Enter your First Name";
 const String kLastNameNullError = "Please Enter your Last Name";
 const String kPhoneNumberNullError = "Please Enter your phone number";
+const String kImageNull = "Please upload your image";
 
 // RegExp คือคลาสใน Dart ที่ใช้สำหรับการจับคู่และค้นหาข้อความตามรูปแบบที่กำหนด (regular expression)
 

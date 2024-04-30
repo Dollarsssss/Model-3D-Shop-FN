@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:flutter_ecommerce/screens/sign_up_success/sign_up_success_screen.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/custom_suffix.icon.dart';
@@ -7,6 +9,8 @@ import 'package:flutter_ecommerce/components/form_error.dart';
 import 'package:flutter_ecommerce/constants.dart';
 // import 'package:flutter_ecommerce/screens/sign_up_success/sign_up_success_screen.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+
 
 class CompleteSignUpForm extends StatefulWidget {
   const CompleteSignUpForm({super.key, required this.email, required this.password});
@@ -25,26 +29,33 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
   String firstname = "";
   String lastname = "";
   String phone = "";
+  String img64 = "";
+  bool imageUpload = false;
+
 
 
   Future<void> _register() async {
+
     final url = Uri.parse('http://192.168.1.9:3000/register');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({
-      'firstname': firstname,
-      'lastname': lastname,
+      'fname': firstname,
+      'lname': lastname,
       'email': widget.email, 
       'password': widget.password,
       'phone': phone,
+      'avatar': img64
     });
+
+    
 
     final res = await http.post(url, headers: headers, body: body);
 
     if (res.statusCode == 200) {
-      print( "${widget.email}, ${widget.password}, $firstname, $lastname, $phone,");
+      print( "${widget.email}, ${widget.password}, $firstname, $lastname, $phone,$img64");
         //Navigator.pushNamed(context, SignUpSuccess.routeName);
     } else {
-      print( "${widget.email}, ${widget.password}, $firstname, $lastname, $phone,");
+      print( "${widget.email}, ${widget.password}, $firstname, $lastname, $phone,$img64,");
       print('Status Code: ${res.statusCode}');
       print('Response Body: ${res.body}');
     }
@@ -80,30 +91,57 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
           buildPhoneFormField(),
           const SizedBox(height: 30,),
           FormError(errors: errors),
-          ElevatedButton(
-          child: Text('Upload Image'),
-          onPressed: () async {
-            final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
-            if (pickedFile != null) {
-              // Handle the image file
-              print(pickedFile.path);
-            }
-          },
-        ),
-        const SizedBox(height: 30,),
+          buildUplaodImage(),
+          const SizedBox(height: 30,),
           DefaultButton(
             text: "Continue", 
             press: (){
-              if(_formKey.currentState!.validate()){
+              if(_formKey.currentState!.validate() && imageUpload == true){
                 _formKey.currentState!.save();
-                _register();
+                  _register();
+                  Navigator.pushNamed(context, SignUpSuccess.routeName);
                 //print("True email is ${widget.email} password is${widget.password} First name: $firstname Lastname is $lastname phone is $phone" );
-             
-              }else{print("false First name: $firstname Lastname is $lastname phone is $phone" );}
-            })
+
+              }else{
+                addError(error: kImageNull);
+                print("false First name: $firstname Lastname is $lastname phone is $phone" );
+                }
+            }
+          )
         ],
       ),
     );
+  }
+
+  ElevatedButton buildUplaodImage() {
+    return ElevatedButton(
+        child: const Text('Upload Image'),
+        onPressed: () async {
+          // ignore: deprecated_member_use
+          final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+          if (pickedFile != null) {
+
+              final dir = await getTemporaryDirectory();
+              final targetPath = '${dir.absolute.path}/temp.jpg';
+
+            // บีบอัด
+            final result = await FlutterImageCompress.compressAndGetFile(
+              pickedFile.path,
+              targetPath,
+              quality: 10,
+            );
+
+            final bytes = await result?.readAsBytes();
+            img64 = base64Encode(bytes!);
+            imageUpload = true;
+            removeError(error: kImageNull);
+          }else {
+            imageUpload = false;
+            addError(error: kImageNull);
+            print('No image selected.');
+          }
+        },
+      );
   }
 
 

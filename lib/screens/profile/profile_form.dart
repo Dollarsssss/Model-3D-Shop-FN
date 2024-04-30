@@ -10,7 +10,7 @@ class ProfileForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const ProFilePic(),
+        ProFilePic(),
         const SizedBox(height: 40),
         ProfileMenu(
           icon: "assets/icons/User Icon.svg",
