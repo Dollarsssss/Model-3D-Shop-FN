@@ -6,13 +6,18 @@ import 'package:flutter_ecommerce/constants.dart';
 import 'package:flutter_ecommerce/screens/sign_up_success/sign_up_success_screen.dart';
 
 class CompleteSignUpForm extends StatefulWidget {
-  const CompleteSignUpForm({super.key});
+  const CompleteSignUpForm({super.key, required this.email, required this.password});
+  
+  final String email;
+  final String password;
 
   @override
   State<CompleteSignUpForm> createState() => _CompleteSignUpFormState();
 }
 
 class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
+
+
 
   final _formKey = GlobalKey<FormState>();
   final List<String> errors =[];
@@ -56,7 +61,7 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
             press: (){
               if(_formKey.currentState!.validate()){
                 _formKey.currentState!.save();
-                print("True First name: $firstname Lastname is $lastname phone is $phone" );
+                print("True email is ${widget.email} password is${widget.password} First name: $firstname Lastname is $lastname phone is $phone" );
                 Navigator.pushNamed(context, SignUpSuccess.routeName);
               }else{print("false First name: $firstname Lastname is $lastname phone is $phone" );}
             })

@@ -56,7 +56,14 @@ class _SignUpFormState extends State<SignUpForm> {
             if(_formkey.currentState!.validate()){
                 _formkey.currentState!.save();
                 print("True : Email is $email and this is $password and Confirm Password is $confirm_password");
-                Navigator.pushNamed(context, CompleteSignUp.routeName);
+                Navigator.pushNamed(
+                context,
+                CompleteSignUp.routeName,
+                arguments: {
+                  'email': email,
+                  'password': password,
+                },
+              );
             }else{print("Fasle : Email is $email and this is $password and Confirm Password is $confirm_password");}
           }
         ),  
