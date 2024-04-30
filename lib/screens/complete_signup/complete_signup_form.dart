@@ -1,9 +1,12 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/custom_suffix.icon.dart';
 import 'package:flutter_ecommerce/components/defualt_button.dart';
 import 'package:flutter_ecommerce/components/form_error.dart';
 import 'package:flutter_ecommerce/constants.dart';
-import 'package:flutter_ecommerce/screens/sign_up_success/sign_up_success_screen.dart';
+// import 'package:flutter_ecommerce/screens/sign_up_success/sign_up_success_screen.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CompleteSignUpForm extends StatefulWidget {
   const CompleteSignUpForm({super.key, required this.email, required this.password});
@@ -17,14 +20,36 @@ class CompleteSignUpForm extends StatefulWidget {
 
 class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
 
-
-
   final _formKey = GlobalKey<FormState>();
   final List<String> errors =[];
   String firstname = "";
   String lastname = "";
   String phone = "";
-  String address = ""; 
+
+
+  Future<void> _register() async {
+    final url = Uri.parse('http://192.168.1.9:3000/register');
+    final headers = {'Content-Type': 'application/json'};
+    final body = jsonEncode({
+      'firstname': firstname,
+      'lastname': lastname,
+      'email': widget.email, 
+      'password': widget.password,
+      'phone': phone,
+    });
+
+    final res = await http.post(url, headers: headers, body: body);
+
+    if (res.statusCode == 200) {
+      print( "${widget.email}, ${widget.password}, $firstname, $lastname, $phone,");
+        //Navigator.pushNamed(context, SignUpSuccess.routeName);
+    } else {
+      print( "${widget.email}, ${widget.password}, $firstname, $lastname, $phone,");
+      print('Status Code: ${res.statusCode}');
+      print('Response Body: ${res.body}');
+    }
+}
+
 
   void addError({required String error}){
   if (!errors.contains(error)){
@@ -55,14 +80,25 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
           buildPhoneFormField(),
           const SizedBox(height: 30,),
           FormError(errors: errors),
-          const SizedBox(height: 30,),
+          ElevatedButton(
+          child: Text('Upload Image'),
+          onPressed: () async {
+            final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+            if (pickedFile != null) {
+              // Handle the image file
+              print(pickedFile.path);
+            }
+          },
+        ),
+        const SizedBox(height: 30,),
           DefaultButton(
             text: "Continue", 
             press: (){
               if(_formKey.currentState!.validate()){
                 _formKey.currentState!.save();
-                print("True email is ${widget.email} password is${widget.password} First name: $firstname Lastname is $lastname phone is $phone" );
-                Navigator.pushNamed(context, SignUpSuccess.routeName);
+                _register();
+                //print("True email is ${widget.email} password is${widget.password} First name: $firstname Lastname is $lastname phone is $phone" );
+             
               }else{print("false First name: $firstname Lastname is $lastname phone is $phone" );}
             })
         ],

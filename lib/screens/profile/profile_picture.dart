@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:http/http.dart' as http;
 
 class ProFilePic extends StatelessWidget {
   const ProFilePic({
@@ -17,8 +19,8 @@ class ProFilePic extends StatelessWidget {
             fit: StackFit.expand,
             clipBehavior: Clip.none,
             children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage("assets/images/Profile Image.png"),
+               CircleAvatar(
+                child: Image.network("https://www.melivecode.com/users/4.png"),
               ),
               Positioned(
                 right: -12,

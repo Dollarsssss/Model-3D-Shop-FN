@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/screens/profile/profile_menu.dart';
 import 'package:flutter_ecommerce/screens/profile/profile_picture.dart';
+import 'package:flutter_ecommerce/screens/sign_in/sign_in_screen.dart';
 
 class ProfileForm extends StatelessWidget {
   const ProfileForm({super.key});
@@ -26,7 +27,9 @@ class ProfileForm extends StatelessWidget {
         ProfileMenu(
           icon: "assets/icons/Log out.svg",
           text:"Log Out",
-          press: (){}
+          press: (){
+             Navigator.pushNamed(context, SignIn.routeName);
+          }
           ),
       ],
     );
