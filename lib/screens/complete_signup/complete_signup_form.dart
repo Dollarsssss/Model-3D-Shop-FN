@@ -7,7 +7,6 @@ import 'package:flutter_ecommerce/components/custom_suffix.icon.dart';
 import 'package:flutter_ecommerce/components/defualt_button.dart';
 import 'package:flutter_ecommerce/components/form_error.dart';
 import 'package:flutter_ecommerce/constants.dart';
-// import 'package:flutter_ecommerce/screens/sign_up_success/sign_up_success_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -33,7 +32,6 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
   bool imageUpload = false;
 
 
-
   Future<void> _register() async {
 
     final url = Uri.parse('http://192.168.1.9:3000/register');
@@ -47,8 +45,6 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
       'avatar': img64
     });
 
-    
-
     final res = await http.post(url, headers: headers, body: body);
 
     if (res.statusCode == 200) {
@@ -59,24 +55,24 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
       print('Status Code: ${res.statusCode}');
       print('Response Body: ${res.body}');
     }
-}
-
-
-  void addError({required String error}){
-  if (!errors.contains(error)){
-  setState(() {
-    errors.add(error);
-  });
   }
-}
 
-  void removeError({required String error}){
-  if(errors.contains(error)){
+    void addError({required String error}){
+    if (!errors.contains(error)){
     setState(() {
-      errors.remove(error);
+      errors.add(error);
     });
+    }
   }
-}
+
+    void removeError({required String error}){
+    if(errors.contains(error)){
+      setState(() {
+        errors.remove(error);
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -142,8 +138,7 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
           }
         },
       );
-  }
-
+    }
 
   TextFormField buildPhoneFormField() {
     return TextFormField(
@@ -177,7 +172,7 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
               hintText: "Enter your phone number",
               suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/Phone.svg")),
         );
-  }
+    }
 
   TextFormField buildLastNameFormField() {
     return TextFormField(
@@ -204,7 +199,7 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
               hintText: "Enter your Last name",
               suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/User.svg")),
         );
-  }
+    }
 
   TextFormField buildFirstNameFormField() {
     return TextFormField(
@@ -230,6 +225,6 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
               labelText: "First Name",
               hintText: "Enter your first name",
               suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/User.svg")),
-        );
+    );
   }
 }
