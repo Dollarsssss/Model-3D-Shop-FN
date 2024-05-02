@@ -17,10 +17,10 @@ class _ProFilePicState extends State<ProFilePic> {
   @override
   void initState() {
     super.initState();
-    _login();
+    _fetch();
   }
 
-  Future<void> _login() async {
+  Future<void> _fetch() async {
     final url = Uri.parse('http://192.168.1.9:3000/users');
     final headers = {'Content-Type': 'application/json'};
 

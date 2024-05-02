@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/models/product.dart';
 import 'package:flutter_ecommerce/screens/details/details.screen.dart';
-import 'package:flutter_ecommerce/screens/home/card_item.dart';
+import 'package:flutter_ecommerce/screens/home/item_card.dart';
 import 'package:flutter_ecommerce/screens/home/categories.dart';
 
 class HomeForm extends StatelessWidget {

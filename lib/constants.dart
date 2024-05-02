@@ -12,8 +12,6 @@ const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Colors.black;
 const kTextLightColor = Color(0xFFACACAC);
 
-// const kAnimationDuration = Duration(milliseconds: 200);
-
 //Form Error
 final RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+"); 
 //เอาไว้ตรวจรายละเอียดอีเมล
