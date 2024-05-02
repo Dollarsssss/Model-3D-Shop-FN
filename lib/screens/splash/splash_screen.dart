@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/screens/sign_in/sign_in_screen.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_ecommerce/models/product.dart';
 
 
 
@@ -9,6 +10,7 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
   
   static String routeName = "/splash";
+
   
   @override
   State<StatefulWidget> createState() {
@@ -21,6 +23,7 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    Product.fetchProduct();
     Timer(const Duration(seconds: 5), () {
       Navigator.of(context).pushNamed(SignIn.routeName);
     });

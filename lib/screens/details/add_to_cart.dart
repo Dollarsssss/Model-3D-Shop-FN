@@ -22,10 +22,10 @@ class AddtoCart extends StatelessWidget {
             width: 58,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
-                border: Border.all(color: product.color)),
+                border: Border.all(color: Color(product.color as int))),
             child: IconButton(
               icon: SvgPicture.asset(
-                  "assets/icons/add_to_cart.svg",color: product.color,),
+                  "assets/icons/add_to_cart.svg",color: Color(product.color as int),),
               onPressed: () {},
             ),
           ),
@@ -36,7 +36,7 @@ class AddtoCart extends StatelessWidget {
                 style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18)),
-                  backgroundColor: product.color,
+                  backgroundColor: Color(product.color as int),
                 ),
                 onPressed: () {},
                 child: Text(

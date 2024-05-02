@@ -12,9 +12,9 @@ class Detail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: product.color,
+      backgroundColor: Color(product.color as int),
       appBar: AppBar(
-      backgroundColor: product.color,
+      backgroundColor: Color(product.color as int),
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: 0,
       actions:[
