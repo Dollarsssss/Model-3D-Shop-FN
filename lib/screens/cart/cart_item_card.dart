@@ -22,30 +22,30 @@ class CarrItemCard extends StatelessWidget {
             aspectRatio: 0.88,
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xFFF5F6F9),
+                color: const Color(0xFFF5F6F9),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Image.asset(products.image),
             ),
           ),
         ),
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               products.title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 color: Colors.black,
               ),
               maxLines: 2,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text.rich(TextSpan(
                 text: '\$${products.price}',
-                style: TextStyle(color: kPrimaryColor),
-                children: [TextSpan(text: "xNumberOfItem ")]))
+                style:const TextStyle(color: kPrimaryColor),
+                children: const [TextSpan(text: "xNumberOfItem ")]))
           ],
         )
       ],

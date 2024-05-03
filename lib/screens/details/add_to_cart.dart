@@ -49,12 +49,10 @@ class CartAdd with ChangeNotifier {
         },
       );
         return;
-      }else{
-      _items.add(AddtoCart(product: product, numberItem: numberItem));
-      notifyListeners();
       }
   }
- 
+    _items.add(AddtoCart(product: product, numberItem: numberItem));
+    notifyListeners();
   }
 
     void removeItem(int productId) {
@@ -101,9 +99,7 @@ class _AddtoCartState extends State<AddtoCart> {
                   }),
             ],
           ),
-          SizedBox(
-            height: 35,
-          ),
+          const SizedBox( height: 35 ),
           Row(
             children: [
               Container(

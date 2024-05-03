@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/models/product.dart';
 import 'package:flutter_ecommerce/screens/cart/cart_item_card.dart';
 import 'package:flutter_ecommerce/screens/details/add_to_cart.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,6 +12,7 @@ class CartForm extends StatefulWidget {
 }
 
 List<dynamic> obproducts = [];
+// ignore: prefer_typing_uninitialized_variables
 var numberItem;
 
 class _CartFormState extends State<CartForm> {
@@ -28,7 +28,7 @@ class _CartFormState extends State<CartForm> {
     });
    
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20 ),
+      padding: const EdgeInsets.symmetric(horizontal: 20 ),
       child: ListView.builder(
         itemCount: obproducts.length,
         itemBuilder: (context, index) => Padding(
@@ -37,12 +37,12 @@ class _CartFormState extends State<CartForm> {
             key: Key(obproducts[index].id.toString()),
             direction: DismissDirection.endToStart,
             background: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
-                  color: Color(0xFFFFE6E6),
+                  color: const Color(0xFFFFE6E6),
                   borderRadius: BorderRadius.circular(15)),
               child: Row(
-                children: [Spacer(), SvgPicture.asset("assets/icons/Trash.svg")],
+                children: [const Spacer(), SvgPicture.asset("assets/icons/Trash.svg")],
               ),
             ),
             onDismissed: (direction){

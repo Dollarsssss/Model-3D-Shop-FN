@@ -26,7 +26,6 @@ class Detail extends StatelessWidget {
           ),
            IconBtnWithCounter(
             svgSrc: "assets/icons/cart.svg",
-            numOfItem: 3,
             press: (){
               Navigator.pushNamed(context, Cart.routeName);
             },

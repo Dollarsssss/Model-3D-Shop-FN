@@ -100,7 +100,6 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
 
               }else{
                 addError(error: kImageNull);
-                print("false First name: $firstname Lastname is $lastname phone is $phone" );
                 }
             }
           )
@@ -218,8 +217,7 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
               return "";
             }
             return null;
-            //เหตุผลที่ validator คืนค่าว่าง “” แทนที่จะคืนค่า null เมื่อมี error คือเพราะว่าคุณได้กำหนดให้คืนค่าว่าง “” ในเงื่อนไข if (errors.isNotEmpty).
-            //เมื่อเรียก addError(error: kEmailNullError); หรือ addError(error: kInvalidEmailError); ภายใน validator, คุณกำลังเพิ่ม error ลงใน list errors. ดังนั้น, เมื่อมีการเพิ่ม error, errors.isNotEmpty จะเป็น true และ validator จะคืนค่าว่าง “”.
+            
           },
           decoration: const InputDecoration(
               labelText: "First Name",
