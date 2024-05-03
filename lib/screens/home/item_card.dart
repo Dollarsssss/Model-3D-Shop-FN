@@ -29,7 +29,7 @@ class _ItemCardState extends State<ItemCard> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Color(widget.product.color as int),
+                color: Color(widget.product.color),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Hero(
@@ -48,7 +48,7 @@ class _ItemCardState extends State<ItemCard> {
             ),
           ),
           Text(
-            "\$${widget.product.price}",
+            "\$${widget.product.price.toStringAsFixed(2)}",
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ],

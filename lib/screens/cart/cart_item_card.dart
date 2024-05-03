@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/constants.dart';
 import 'package:flutter_ecommerce/models/product.dart';
 
+
 class CarrItemCard extends StatelessWidget {
   const CarrItemCard({
     super.key,
@@ -9,9 +10,10 @@ class CarrItemCard extends StatelessWidget {
   });
 
   final Product products;
-
+  
   @override
   Widget build(BuildContext context) {
+
     return Row(
       children: [
         SizedBox(

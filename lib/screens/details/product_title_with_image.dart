@@ -36,7 +36,7 @@ class ProductTitleWithImage extends StatelessWidget {
                   text: TextSpan(children: [
                 const TextSpan(text: "Price\n"),
                 TextSpan(
-                    text: "\$${product.price}", 
+                    text: "\$${product.price.toStringAsFixed(2)}", 
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 38,

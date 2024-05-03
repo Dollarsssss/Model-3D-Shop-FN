@@ -19,5 +19,5 @@ final Map<String , WidgetBuilder> routes = {
   SignUpSuccess.routeName:(context)=> const SignUpSuccess(),
   Home.routeName:(context)=>const Home(),
   Profile.routeName:(context) => const Profile(),
-  Cart.routeName:(context) => const Cart(),
+  Cart.routeName:(context) =>  const Cart(),
 };

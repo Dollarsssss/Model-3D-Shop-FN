@@ -40,7 +40,7 @@ class DetailForm extends StatelessWidget {
                       //const SizedBox(height: 10),
                       // CartCount(),
                       // const SizedBox(height: 10),
-                      AddtoCart(product: product)
+                      AddtoCart(product: product, numberItem: 1)
                     ],
                   ),
                 ),

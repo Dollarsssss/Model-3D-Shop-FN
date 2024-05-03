@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/models/product.dart';
 import 'package:flutter_ecommerce/screens/cart/cart_item_card.dart';
+import 'package:flutter_ecommerce/screens/details/add_to_cart.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class CartForm extends StatefulWidget {
   const CartForm({super.key,});
@@ -10,18 +12,29 @@ class CartForm extends StatefulWidget {
   State<CartForm> createState() => _CartFormState();
 }
 
+List<dynamic> obproducts = [];
+var numberItem;
 
 class _CartFormState extends State<CartForm> {
   @override
   Widget build(BuildContext context) {
+
+    var cart = Provider.of<CartAdd>(context);
+    obproducts.clear();
+
+    cart.items.forEach((item) {
+      obproducts.add(item.product);
+      numberItem = item.numberItem;
+    });
+   
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20 ),
       child: ListView.builder(
-        itemCount: products.length,
+        itemCount: obproducts.length,
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Dismissible(
-            key: Key(products[index].id.toString()),
+            key: Key(obproducts[index].id.toString()),
             direction: DismissDirection.endToStart,
             background: Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -34,10 +47,10 @@ class _CartFormState extends State<CartForm> {
             ),
             onDismissed: (direction){
               setState(() {
-                products.removeAt(index);
+                cart.removeItem(obproducts[index].id);
               });
             },
-            child: CarrItemCard(products: products[index]),
+            child: CarrItemCard(products: obproducts[index],),
           ),
         ),
       ),

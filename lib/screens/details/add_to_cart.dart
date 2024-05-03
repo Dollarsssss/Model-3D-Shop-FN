@@ -1,26 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/models/product.dart';
-import 'package:flutter_ecommerce/screens/cart/cart_screen.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class AddtoCart extends StatefulWidget {
-  const AddtoCart({
-    super.key,
-    required this.product,
-  });
 
   final Product product;
+  var numberItem;
+
+    AddtoCart({
+    super.key,
+    required this.product, 
+    required this.numberItem
+  });
 
   @override
   State<AddtoCart> createState() => _AddtoCartState();
 }
 
 
+class CartAdd with ChangeNotifier {
+
+  final List<AddtoCart> _items = [];
+
+  List<AddtoCart> get items => _items;
+
+
+  void addItem(BuildContext context,Product product, int numberItem) {
+
+    for (var item in _items) {
+      if (item.product.id == product.id) {
+            showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('สินค้านี้มีอยู่แล้วในตะกร้า'),
+            content: Text('คุณไม่สามารถเพิ่มสินค้าที่มีอยู่แล้วในตะกร้าได้'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('ปิด'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+        return;
+      }else{
+      _items.add(AddtoCart(product: product, numberItem: numberItem));
+      notifyListeners();
+      }
+  }
+ 
+  }
+
+    void removeItem(int productId) {
+    _items.removeWhere((item) => item.product.id == productId);
+    notifyListeners();
+  }
+}
+
+
 class _AddtoCartState extends State<AddtoCart> {
-  int numberItem = 1;
+ 
 
   @override
   Widget build(BuildContext context) {
+    
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(
@@ -31,16 +80,15 @@ class _AddtoCartState extends State<AddtoCart> {
                   icon: Icons.remove,
                   press: () {
                     setState(() {
-                      if (numberItem > 1) {
-                        numberItem--;
-                        print(numberItem);
+                      if (widget.numberItem > 1) {
+                        widget.numberItem --;
                       }
                     });
                   }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
-                  numberItem.toString().padLeft(2, "0"),
+                  widget.numberItem .toString().padLeft(2, "0"),
                   style: const TextStyle(fontSize: 28),
                 ),
               ),
@@ -48,8 +96,7 @@ class _AddtoCartState extends State<AddtoCart> {
                   icon: Icons.add,
                   press: () {
                     setState(() {
-                      numberItem++;
-                      print(numberItem);
+                      widget.numberItem ++;
                     });
                   }),
             ],
@@ -71,7 +118,9 @@ class _AddtoCartState extends State<AddtoCart> {
                     "assets/icons/add_to_cart.svg",
                     color: Color(widget.product.color),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                  Provider.of<CartAdd>(context, listen: false).addItem(context,widget.product, widget.numberItem);
+                  },
                 ),
               ),
               Expanded(
@@ -83,15 +132,7 @@ class _AddtoCartState extends State<AddtoCart> {
                           borderRadius: BorderRadius.circular(18)),
                       backgroundColor: Color(widget.product.color),
                     ),
-                    onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => Cart(
-                            product: products,
-                          )
-                        )
-                    );
-                    },
+                    onPressed: () {},
                     child: Text(
                       "Buy Now".toUpperCase(),
                       style: const TextStyle(
