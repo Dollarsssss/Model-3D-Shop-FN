@@ -1,54 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/constants.dart';
 import 'package:flutter_ecommerce/models/product.dart';
+import 'package:flutter_ecommerce/screens/cart/cart_item_card.dart';
+import 'package:flutter_svg/svg.dart';
 
-class CartForm extends StatelessWidget {
-  const CartForm({super.key});
-  
+class CartForm extends StatefulWidget {
+  const CartForm({super.key,});
 
   @override
+  State<CartForm> createState() => _CartFormState();
+}
+
+
+class _CartFormState extends State<CartForm> {
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            SizedBox(
-              width: 100,
-              child: AspectRatio(
-                aspectRatio: 0.88,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF5F6F9),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Image.asset(products[0].image),
-                ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20 ),
+      child: ListView.builder(
+        itemCount: products.length,
+        itemBuilder: (context, index) => Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Dismissible(
+            key: Key(products[index].id.toString()),
+            direction: DismissDirection.endToStart,
+            background: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                  color: Color(0xFFFFE6E6),
+                  borderRadius: BorderRadius.circular(15)),
+              child: Row(
+                children: [Spacer(), SvgPicture.asset("assets/icons/Trash.svg")],
               ),
             ),
-            SizedBox(width: 20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  products[0].title,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                  ),
-                  maxLines: 2,
-                ),
-                SizedBox(height: 10),
-                Text.rich(TextSpan(
-                    text: '\$${products[0].price}',
-                    style: TextStyle(color: kPrimaryColor),
-                    children: [TextSpan(text: "x${products.length} ")]
-                  )
-                )
-              ],
-            )
-          ],
+            onDismissed: (direction){
+              setState(() {
+                products.removeAt(index);
+              });
+            },
+            child: CarrItemCard(products: products[index]),
+          ),
         ),
-      ],
+      ),
     );
   }
 }
+

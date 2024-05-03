@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/routs.dart';
+import 'package:flutter_ecommerce/screens/details/card_count.dart';
 import 'package:flutter_ecommerce/screens/splash/splash_screen.dart';
 import 'theme.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/models/product.dart';
 import 'package:flutter_ecommerce/screens/details/add_to_cart.dart';
-import 'package:flutter_ecommerce/screens/details/card_count.dart';
+// import 'package:flutter_ecommerce/screens/details/card_count.dart';
 import 'package:flutter_ecommerce/screens/details/description.dart';
 import 'package:flutter_ecommerce/screens/details/premium_and_size.dart';
 import 'package:flutter_ecommerce/screens/details/product_title_with_image.dart';
@@ -37,9 +37,9 @@ class DetailForm extends StatelessWidget {
                       PremiumAndSize(product: product),
                       const SizedBox(height: 10),
                       Description(product: product),
-                      const SizedBox(height: 10),
-                      const CartCount(),
-                      const SizedBox(height: 10),
+                      //const SizedBox(height: 10),
+                      // CartCount(),
+                      // const SizedBox(height: 10),
                       AddtoCart(product: product)
                     ],
                   ),

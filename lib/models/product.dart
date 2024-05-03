@@ -49,6 +49,7 @@ class Product {
   } else {
     throw Exception('Data is not a List<dynamic>');
   }
+  print(products.runtimeType);
 } else {
   print('Failed to load data: ${response.statusCode}');
 }
@@ -57,6 +58,7 @@ class Product {
 }
 
  List<Product> products = [];
+
 // List<Product> products = [
   // Product(
   //     id: 1,
