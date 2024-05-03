@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/constants.dart';
-import 'package:flutter_ecommerce/models/product.dart';
+import 'package:flutter_ecommerce/models/newproduct.dart';
 
-
-class CarrItemCard extends StatelessWidget {
+class CarrItemCard extends StatefulWidget {
   const CarrItemCard({
     super.key,
-    required this.products,
+     required this.newproduct,
   });
 
-  final Product products;
-  
+  final NewProduct newproduct;
+
+  @override
+  State<CarrItemCard> createState() => _CarrItemCardState();
+}
+
+class _CarrItemCardState extends State<CarrItemCard> {
   @override
   Widget build(BuildContext context) {
-
+    var totalprice = widget.newproduct.price * widget.newproduct.numberItem;
     return Row(
       children: [
         SizedBox(
@@ -25,7 +29,7 @@ class CarrItemCard extends StatelessWidget {
                 color: const Color(0xFFF5F6F9),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.asset(products.image),
+              child: Image.asset(widget.newproduct.image),
             ),
           ),
         ),
@@ -34,7 +38,7 @@ class CarrItemCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              products.title,
+              widget.newproduct.title,
               style: const TextStyle(
                 fontSize: 18,
                 color: Colors.black,
@@ -42,10 +46,16 @@ class CarrItemCard extends StatelessWidget {
               maxLines: 2,
             ),
             const SizedBox(height: 10),
-            Text.rich(TextSpan(
-                text: '\$${products.price}',
+            Text.rich(
+              TextSpan(
+                text: '\$${totalprice.toStringAsFixed(2)}',
                 style:const TextStyle(color: kPrimaryColor),
-                children: const [TextSpan(text: "xNumberOfItem ")]))
+                children:[
+                  TextSpan(text: "  x${widget.newproduct.numberItem}",
+                  style: const TextStyle(color: Colors.black))
+                  ]
+                )
+            )
           ],
         )
       ],

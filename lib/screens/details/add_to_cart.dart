@@ -35,11 +35,11 @@ class CartAdd with ChangeNotifier {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('สินค้านี้มีอยู่แล้วในตะกร้า'),
-            content: Text('คุณไม่สามารถเพิ่มสินค้าที่มีอยู่แล้วในตะกร้าได้'),
+            title: const Text('สินค้านี้มีอยู่แล้วในตะกร้า'),
+            content: const Text('คุณไม่สามารถเพิ่มสินค้าที่มีอยู่แล้วในตะกร้าได้'),
             actions: <Widget>[
               TextButton(
-                child: Text('ปิด'),
+                child: const Text('ปิด'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

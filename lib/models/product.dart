@@ -19,6 +19,7 @@ class Product {
       required this.color,
       required this.quality,
       required this.model,
+    
     }
   );
 
@@ -42,14 +43,13 @@ class Product {
           image: item['image'],
           color: item['color'],
           quality: item['quality'],
-          model: item['model'],
+          model: item['model'], 
         );
       
     }).toList();
   } else {
     throw Exception('Data is not a List<dynamic>');
   }
-  print(products.runtimeType);
 } else {
   print('Failed to load data: ${response.statusCode}');
 }
