@@ -25,7 +25,7 @@ class CompleteSignUp extends StatelessWidget {
           child: SizedBox(
         width: double.infinity, //ความกว้างเต็มพื้นที่
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
             child: Column(
               children: [
