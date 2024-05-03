@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/screens/cart/cart_screen.dart';
 import 'package:flutter_ecommerce/screens/complete_signup/complete_signup_screen.dart';
 import 'package:flutter_ecommerce/screens/home/home_screen.dart';
 import 'package:flutter_ecommerce/screens/profile/profile_screen.dart';
@@ -18,4 +19,5 @@ final Map<String , WidgetBuilder> routes = {
   SignUpSuccess.routeName:(context)=> const SignUpSuccess(),
   Home.routeName:(context)=>const Home(),
   Profile.routeName:(context) => const Profile(),
+  Cart.routeName:(context) => const Cart(),
 };
