@@ -7,15 +7,29 @@ import 'package:flutter_ecommerce/components/form_error.dart';
 import 'package:flutter_ecommerce/constants.dart';
 import 'package:flutter_ecommerce/screens/home/home_screen.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
-class SingInForm extends StatefulWidget {
-  const SingInForm({super.key});
+
+
+class SignInForm extends StatefulWidget {
+  const SignInForm({super.key});
 
   @override
-  State<SingInForm> createState() => _SingInFormState();
+  State<SignInForm> createState() => _SignInFormState();
 }
 
-class _SingInFormState extends State<SingInForm> {
+class EmailModel extends ChangeNotifier {
+  String _email = '';
+
+  String get email => _email;
+
+  void setEmail(String email) {
+    _email = email;
+    notifyListeners();
+  }
+}
+
+class _SignInFormState extends State<SignInForm> {
   final _formkey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -30,6 +44,7 @@ class _SingInFormState extends State<SingInForm> {
     final res = await http.post(url, headers: headers, body: body);
 
     if (res.statusCode == 200) {
+       Provider.of<EmailModel>(context, listen: false).setEmail(_email.text);
       // ignore: use_build_context_synchronously
       showDialog(
           context: context,
@@ -45,11 +60,13 @@ class _SingInFormState extends State<SingInForm> {
               ),
             );
           });
-      Future.delayed(Duration(seconds: 3), () {
+          
+        Future.delayed(Duration(seconds: 3), () {
         // ปิด dialog
         Navigator.of(context).pop();
         // ไปหน้าถัดไป
         Navigator.pushNamed(context, Home.routeName);
+
       });
     } else {
       // ignore: use_build_context_synchronously

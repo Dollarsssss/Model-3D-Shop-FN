@@ -16,18 +16,27 @@ class CheckOurCard extends StatefulWidget {
 
 }
 
+  String voucherCode='';
 
-class _CheckOurCardState extends State<CheckOurCard> {
+  class _CheckOurCardState extends State<CheckOurCard> {
   @override
   Widget build(BuildContext context) {
-
+  
     var allItemPrice = Provider.of<AllItemPrice>(context);
     double alltotal = 0;
   
     allItemPrice.totalPrices.forEach((item){
       alltotal += item;
     });
-    
+
+    if (voucherCode == '1234') {
+      alltotal -= 100;
+    }
+    if (allItemPrice.totalPrices.isEmpty){
+      alltotal = 0;
+      voucherCode="";
+    }
+
     return Container(
       padding:const EdgeInsets.symmetric(vertical: 15,horizontal: 30),
       decoration: BoxDecoration(color: Colors.white,
@@ -56,19 +65,41 @@ class _CheckOurCardState extends State<CheckOurCard> {
                   const Spacer(),
                   GestureDetector(
                   onTap: () {
+                    final voucherController = TextEditingController();
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: const Text('Enter Voucher Code'),
-                          content: const TextField(
-                            decoration: InputDecoration(hintText: "Enter your voucher code here"),
+                          content: TextField(
+                            controller: voucherController,
+                            decoration: const InputDecoration(hintText: "Enter your voucher code here"),
                           ),
                           actions: <Widget>[
                             TextButton(
                               child: const Text('Submit'),
                               onPressed: () {
+                                setState(() {
+                                voucherCode = voucherController.text;
+                              });
                                 Navigator.of(context).pop();
+                                  showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Voucher Code Entered'),
+                                      content: const Text('You have entered 100.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('OK'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               },
                             ),
                           ],

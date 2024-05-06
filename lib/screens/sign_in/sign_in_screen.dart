@@ -41,7 +41,7 @@ class SignIn extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 80),
-                const SingInForm(),
+                const SignInForm(),
                 const SizedBox(height: 60),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
