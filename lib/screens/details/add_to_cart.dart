@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/models/product.dart';
+import 'package:flutter_ecommerce/screens/cart/cart_screen.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -55,6 +56,34 @@ class CartAdd with ChangeNotifier {
     notifyListeners();
   }
 
+    void buyNow(BuildContext context,Product product, int numberItem) {
+
+    for (var item in _items) {
+      if (item.product.id == product.id) {
+            showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('สินค้านี้มีอยู่แล้วในตะกร้า'),
+            content: const Text('คุณไม่สามารถเพิ่มสินค้าที่มีอยู่แล้วในตะกร้าได้'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('ปิด'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+        return;
+      }
+  }
+    _items.add(AddtoCart(product: product, numberItem: numberItem));
+     Navigator.pushNamed(context, Cart.routeName);
+    notifyListeners();
+  }
     void removeItem(int productId) {
     _items.removeWhere((item) => item.product.id == productId);
     notifyListeners();
@@ -129,7 +158,10 @@ class _AddtoCartState extends State<AddtoCart> {
                           borderRadius: BorderRadius.circular(18)),
                       backgroundColor: Color(widget.product.color),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                       Provider.of<CartAdd>(context, listen: false).buyNow(context,widget.product,widget.numberItem);
+                 
+                    },
                     child: Text(
                       "Buy Now".toUpperCase(),
                       style: const TextStyle(
