@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/models/product.dart';
 import 'package:flutter_ecommerce/screens/details/add_to_cart.dart';
-// import 'package:flutter_ecommerce/screens/details/card_count.dart';
 import 'package:flutter_ecommerce/screens/details/description.dart';
 import 'package:flutter_ecommerce/screens/details/premium_and_size.dart';
 import 'package:flutter_ecommerce/screens/details/product_title_with_image.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/routs.dart';
+import 'package:flutter_ecommerce/screens/cart/cart_form.dart';
 import 'package:flutter_ecommerce/screens/details/add_to_cart.dart';
 import 'package:flutter_ecommerce/screens/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
@@ -8,8 +9,11 @@ import 'theme.dart';
 
 void main() {
   runApp( 
-      ChangeNotifierProvider(
-      create: (context) => CartAdd(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CartAdd()),
+        ChangeNotifierProvider(create: (context) => AllItemPrice()),
+      ],
       child: const MyApp(),
     ),
   );

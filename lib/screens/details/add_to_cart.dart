@@ -59,6 +59,7 @@ class CartAdd with ChangeNotifier {
     _items.removeWhere((item) => item.product.id == productId);
     notifyListeners();
   }
+
 }
 
 

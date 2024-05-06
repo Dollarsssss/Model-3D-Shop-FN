@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/screens/cart/cart_checkout.dart';
 import 'package:flutter_ecommerce/screens/cart/cart_form.dart';
 import 'package:flutter_ecommerce/screens/details/add_to_cart.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,8 @@ class _CartState extends State<Cart> {
         centerTitle: true,
       ),
       body:const CartForm(),
+      bottomNavigationBar: CheckOurCard(),
     );
   }
 }
+

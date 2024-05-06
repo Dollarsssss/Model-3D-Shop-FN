@@ -2,22 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/constants.dart';
 import 'package:flutter_ecommerce/models/newproduct.dart';
 
-class CarrItemCard extends StatefulWidget {
-  const CarrItemCard({
-    super.key,
-     required this.newproduct,
+
+// ignore: must_be_immutable
+class CartItemCard extends StatefulWidget  {
+      const CartItemCard({
+      super.key,
+      required this.newproduct, required this.totalprice
   });
 
   final NewProduct newproduct;
+  final double totalprice;
 
+  
   @override
-  State<CarrItemCard> createState() => _CarrItemCardState();
+  State<CartItemCard> createState() => _CartItemCardState();
 }
 
-class _CarrItemCardState extends State<CarrItemCard> {
+class _CartItemCardState extends State<CartItemCard> {
+
   @override
   Widget build(BuildContext context) {
-    var totalprice = widget.newproduct.price * widget.newproduct.numberItem;
+
     return Row(
       children: [
         SizedBox(
@@ -48,7 +53,7 @@ class _CarrItemCardState extends State<CarrItemCard> {
             const SizedBox(height: 10),
             Text.rich(
               TextSpan(
-                text: '\$${totalprice.toStringAsFixed(2)}',
+                text: '\$${widget.totalprice.toStringAsFixed(2)}',
                 style:const TextStyle(color: kPrimaryColor),
                 children:[
                   TextSpan(text: "  x${widget.newproduct.numberItem}",

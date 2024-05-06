@@ -17,7 +17,6 @@ class ItemCard extends StatefulWidget {
   _ItemCardState createState() => _ItemCardState();
 }
 
-int a = 4288189587;
 class _ItemCardState extends State<ItemCard> {
   @override
   Widget build(BuildContext context) {

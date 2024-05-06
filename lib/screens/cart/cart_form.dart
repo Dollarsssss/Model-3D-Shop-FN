@@ -13,16 +13,33 @@ class CartForm extends StatefulWidget {
   @override
   State<CartForm> createState() => _CartFormState();
 }
-
-List<dynamic> obproducts = [];
 List<NewProduct> newproducts = [];
+List<double> totalPrices = [];
+
+class AllItemPrice extends ChangeNotifier {
+
+  List<double> _allItemPrice = [];
+  List<double> get totalPrices => _allItemPrice;
+
+   void addItemPrice(double price) {
+    _allItemPrice.add(price);
+    notifyListeners();
+  }
+   void removeItemPrice(int index) {
+    _allItemPrice.removeAt(index);
+    notifyListeners();
+  }
+}
+
 
 class _CartFormState extends State<CartForm> {
   @override
   Widget build(BuildContext context) {
     var cart = Provider.of<CartAdd>(context);
-    obproducts.clear();
+    var allItemPrice = Provider.of<AllItemPrice>(context);
     newproducts.clear();
+    totalPrices.clear();
+    allItemPrice.totalPrices.clear();
 
     cart.items.forEach((item) {
         NewProduct newProduct = NewProduct(
@@ -38,8 +55,10 @@ class _CartFormState extends State<CartForm> {
         numberItem: item.numberItem
       );
       newproducts.add(newProduct);
+      totalPrices.add(item.product.price * item.numberItem);
+      allItemPrice.addItemPrice(item.product.price * item.numberItem);
+      
     });
-
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -65,10 +84,12 @@ class _CartFormState extends State<CartForm> {
             onDismissed: (direction) {
               setState(() {
                 cart.removeItem(newproducts[index].id);
+                allItemPrice.removeItemPrice(index);
               });
             },
-            child: CarrItemCard(
+            child: CartItemCard(
               newproduct: newproducts[index],
+              totalprice: totalPrices[index],
             ),
           ),
         ),
