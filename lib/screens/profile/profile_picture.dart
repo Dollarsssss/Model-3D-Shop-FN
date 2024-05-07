@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/models/user.dart';
 import 'package:flutter_ecommerce/screens/sign_in/sign_in_form.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;

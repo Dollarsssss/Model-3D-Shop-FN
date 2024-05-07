@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/routs.dart';
 import 'package:flutter_ecommerce/screens/cart/cart_form.dart';
 import 'package:flutter_ecommerce/screens/details/add_to_cart.dart';
+import 'package:flutter_ecommerce/screens/order/order_screen.dart';
 import 'package:flutter_ecommerce/screens/sign_in/sign_in_form.dart';
 import 'package:flutter_ecommerce/screens/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme(),
-      initialRoute: SplashScreen.routeName,
+      initialRoute: Order.routeName,
       routes: routes ,
     );
   }

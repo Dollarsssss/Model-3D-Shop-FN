@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/defualt_button.dart';
 import 'package:flutter_ecommerce/screens/cart/cart_form.dart';
+import 'package:flutter_ecommerce/screens/order/order_screen.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -131,7 +132,9 @@ class CheckOurCard extends StatefulWidget {
                     width: 190,
                     child: DefaultButton(
                       text: "Check Our",
-                      press: (){},
+                      press: (){
+                        Navigator.pushNamed(context, Order.routeName);
+                      },
                     ),
                     ),
                 ],

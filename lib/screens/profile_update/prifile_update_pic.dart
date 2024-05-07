@@ -58,8 +58,7 @@ class _ProfileUpdatePicState extends State<ProfileUpdatePic> {
                         padding: EdgeInsets.zero,
                         backgroundColor: const Color(0xFFF5F6F9),
                       ),
-                      onPressed:  _showImageDialog 
-                      ,
+                      onPressed:  _showImageDialog,
                       child: SvgPicture.asset("assets/icons/Camera Icon.svg")),
                 ),
               )

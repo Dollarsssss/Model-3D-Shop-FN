@@ -58,22 +58,7 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
       });
     }
   }
-    void _showImageDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: const CircleBorder(),
-          child: AspectRatio(
-            aspectRatio: 1, // สร้างสัดส่วน 1:1 สำหรับวงกลม
-            child: ClipOval(
-              child: images,
-            ),
-          ),
-        );
-      },
-    );
-  }
+
 
   Future<void> fetchProfile() async {
     final url = Uri.parse('http://192.168.1.9:3000/users');
