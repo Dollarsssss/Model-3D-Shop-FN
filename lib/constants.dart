@@ -24,6 +24,7 @@ const String kConfPassNullError = "Please Re-enter your password";
 const String kMatchPassError = "Passwords don't match";
 const String kFirstNameNullError = "Please Enter your First Name";
 const String kLastNameNullError = "Please Enter your Last Name";
+const String kAddressNullError = "Please Enter your Address";
 const String kPhoneNumberNullError = "Please Enter your phone number";
 const String kImageNull = "Please upload your image";
 

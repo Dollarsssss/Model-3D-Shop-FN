@@ -65,7 +65,7 @@ class _OrderListState extends State<OrderList> {
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
                             Text(
-                              "811 Forest Oak RPCH Wat\nNawong Suntorlapon",
+                              "811 Forest Oak RPCH Wat Nawong Suntorlapon",
                               style: TextStyle(
                                   fontSize: 13.7,
                                   fontWeight: FontWeight.w400,

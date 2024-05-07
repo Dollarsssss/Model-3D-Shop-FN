@@ -28,6 +28,7 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
   String firstname = "";
   String lastname = "";
   String phone = "";
+  String address = "";
   String img64 = "";
   bool imageUpload = false;
 
@@ -42,16 +43,17 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
       'email': widget.email, 
       'password': widget.password,
       'phone': phone,
-      'avatar': img64
+      'avatar': img64,
+      'address': address,
     });
 
     final res = await http.post(url, headers: headers, body: body);
 
     if (res.statusCode == 200) {
-      print( "${widget.email}, ${widget.password}, $firstname, $lastname, $phone,$img64");
+      print( "${widget.email}, ${widget.password}, $firstname, $lastname, $phone,$img64,$address");
         //Navigator.pushNamed(context, SignUpSuccess.routeName);
     } else {
-      print( "${widget.email}, ${widget.password}, $firstname, $lastname, $phone,$img64,");
+      print( "${widget.email}, ${widget.password}, $firstname, $lastname, $phone,$img64,$address");
       print('Status Code: ${res.statusCode}');
       print('Response Body: ${res.body}');
     }
@@ -86,8 +88,10 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
           const SizedBox(height: 30,),
           buildPhoneFormField(),
           const SizedBox(height: 30,),
-          FormError(errors: errors),
+          buildAddressFormField(),
+          const SizedBox(height: 20,),
           buildUplaodImage(),
+          FormError(errors: errors),
           const SizedBox(height: 30,),
           DefaultButton(
             text: "Continue", 
@@ -107,6 +111,7 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
       ),
     );
   }
+
 
   ElevatedButton buildUplaodImage() {
     return ElevatedButton(
@@ -137,6 +142,33 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
           }
         },
       );
+    }
+
+    TextFormField buildAddressFormField() {
+    return TextFormField(
+          onSaved: (newValue) => address = newValue as String,
+           onChanged: (value) {
+            if (value.isNotEmpty && errors.contains(kAddressNullError)) {
+                removeError(error: kAddressNullError);
+            } 
+            return null;
+          },
+          validator: (value) {
+            if (value!.isEmpty && !errors.contains(kAddressNullError)) {
+                addError(error: kAddressNullError);
+                
+            } if (errors.isNotEmpty) {
+              return "";
+            }
+            return null;
+            //เหตุผลที่ validator คืนค่าว่าง “” แทนที่จะคืนค่า null เมื่อมี error คือเพราะว่าคุณได้กำหนดให้คืนค่าว่าง “” ในเงื่อนไข if (errors.isNotEmpty).
+            //เมื่อเรียก addError(error: kEmailNullError); หรือ addError(error: kInvalidEmailError); ภายใน validator, คุณกำลังเพิ่ม error ลงใน list errors. ดังนั้น, เมื่อมีการเพิ่ม error, errors.isNotEmpty จะเป็น true และ validator จะคืนค่าว่าง “”.
+          },
+          decoration: const InputDecoration(
+              labelText: "Address",
+              hintText: "Enter your Address",
+              suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/User.svg")),
+        );
     }
 
   TextFormField buildPhoneFormField() {

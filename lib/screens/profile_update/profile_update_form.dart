@@ -31,6 +31,7 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
   String firstname = "";
   String lastname = "";
   String phone = "";
+  String address = "";
   String img64 = "";
   bool imageUpload = false;
 
@@ -100,6 +101,7 @@ Future<void> updateProfile(String email, String fname, String lname, String phon
     'lname': lname,
     'phone': phone,
     'avatar': avatar,
+    'address': address,
     'email': email,
   });
 
@@ -133,10 +135,12 @@ Future<void> updateProfile(String email, String fname, String lname, String phon
                   const SizedBox(height: 30),
                   buildPhoneFormField(),
                   const SizedBox(height: 30),
+                  buildAddressFormField(),
+                  const SizedBox(height: 20),
                   buildUplaodImage(),
                   const SizedBox(height: 30),
                   FormError(errors: errors),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   DefaultButton(
                     text: "Save Changes", 
                     press: (){
@@ -212,6 +216,33 @@ Future<void> updateProfile(String email, String fname, String lname, String phon
           }
         },
       );
+    }
+
+      TextFormField buildAddressFormField() {
+    return TextFormField(
+          onSaved: (newValue) => address = newValue as String,
+           onChanged: (value) {
+            if (value.isNotEmpty && errors.contains(kAddressNullError)) {
+                removeError(error: kAddressNullError);
+            } 
+            return null;
+          },
+          validator: (value) {
+            if (value!.isEmpty && !errors.contains(kAddressNullError)) {
+                addError(error: kAddressNullError);
+                
+            } if (errors.isNotEmpty) {
+              return "";
+            }
+            return null;
+            //เหตุผลที่ validator คืนค่าว่าง “” แทนที่จะคืนค่า null เมื่อมี error คือเพราะว่าคุณได้กำหนดให้คืนค่าว่าง “” ในเงื่อนไข if (errors.isNotEmpty).
+            //เมื่อเรียก addError(error: kEmailNullError); หรือ addError(error: kInvalidEmailError); ภายใน validator, คุณกำลังเพิ่ม error ลงใน list errors. ดังนั้น, เมื่อมีการเพิ่ม error, errors.isNotEmpty จะเป็น true และ validator จะคืนค่าว่าง “”.
+          },
+          decoration: const InputDecoration(
+              labelText: "Address",
+              hintText: "Enter your Address",
+              suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/User.svg")),
+        );
     }
 
   TextFormField buildPhoneFormField() {
