@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/screens/order/order_address.dart';
+import 'package:flutter_ecommerce/screens/order/order_button.dart';
 import 'package:flutter_ecommerce/screens/order/order_form.dart';
 
 class Order extends StatefulWidget {
@@ -24,7 +24,7 @@ class _OrderState extends State<Order> {
         centerTitle: true,
       ),
       body: OrderForm(),
-      bottomNavigationBar: OrderAddress(),
+      bottomNavigationBar: OrderButton(),
     );
   }
 }

@@ -29,7 +29,8 @@ InputDecorationTheme inputDecorrationTheme() {
       enabledBorder: border,
       focusedBorder: border,
       errorBorder: border,
-      focusedErrorBorder: border
+      focusedErrorBorder: border,
+      errorStyle:const TextStyle(color: Colors.red,fontSize: 0),
     );
 }
 

@@ -48,6 +48,7 @@ class _SignUpFormState extends State<SignUpForm> {
         bulidPasswordFormField(),
         const SizedBox(height: 30),
         buildConfPasswordFormField(),
+        const SizedBox(height: 15),
         FormError(errors: errors),
         const SizedBox(height: 40),
         DefaultButton(

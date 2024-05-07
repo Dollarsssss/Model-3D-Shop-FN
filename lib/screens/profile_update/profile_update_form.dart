@@ -138,7 +138,7 @@ Future<void> updateProfile(String email, String fname, String lname, String phon
                   buildAddressFormField(),
                   const SizedBox(height: 20),
                   buildUplaodImage(),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 10),
                   FormError(errors: errors),
                   const SizedBox(height: 20),
                   DefaultButton(

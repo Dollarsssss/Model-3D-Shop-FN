@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/defualt_button.dart';
 import 'package:flutter_ecommerce/screens/order/order_screen.dart';
 
-class OrderAddress extends StatefulWidget {
-  const OrderAddress({
+class OrderButton extends StatefulWidget {
+  const OrderButton({
     super.key,
   });
 
   @override
-  State<OrderAddress> createState() => _OrderAddressState();
+  State<OrderButton> createState() => _OrderButtonState();
 
 }
 
 
-  class _OrderAddressState extends State<OrderAddress> {
+  class _OrderButtonState extends State<OrderButton> {
   @override
   Widget build(BuildContext context) {
 
