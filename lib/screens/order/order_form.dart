@@ -44,8 +44,8 @@ class _OrderFormState extends State<OrderForm> {
                   ),
                 ),
               ),
-            SizedBox(height: 40,),
-            const OrderList()
+            const SizedBox(height: 40,),
+            const OrderList(),
           ],
         ),
       )
