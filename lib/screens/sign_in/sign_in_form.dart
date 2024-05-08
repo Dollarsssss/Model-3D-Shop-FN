@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_ecommerce/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/custom_suffix.icon.dart';
@@ -28,6 +29,16 @@ class EmailModel extends ChangeNotifier {
     notifyListeners();
   }
 }
+class UserModel extends ChangeNotifier {
+  User? _user ;
+
+  User? get user => _user;
+
+  void setUser(User user) {
+    _user = user;
+    notifyListeners();
+  }
+}
 
 class _SignInFormState extends State<SignInForm> {
   final _formkey = GlobalKey<FormState>();
@@ -41,10 +52,14 @@ class _SignInFormState extends State<SignInForm> {
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({'email': _email.text, 'password': _password.text});
 
+    final user = await User.fetchUser(_email.text);
+  
     final res = await http.post(url, headers: headers, body: body);
 
     if (res.statusCode == 200) {
+
        Provider.of<EmailModel>(context, listen: false).setEmail(_email.text);
+       Provider.of<UserModel>(context, listen: false).setUser(user);
       // ignore: use_build_context_synchronously
       showDialog(
           context: context,

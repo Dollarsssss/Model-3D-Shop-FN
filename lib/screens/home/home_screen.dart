@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/bottom_nav.dart';
 import 'package:flutter_ecommerce/enums.dart';
+import 'package:flutter_ecommerce/models/user.dart';
 import 'package:flutter_ecommerce/screens/cart/cart_screen.dart';
 import 'package:flutter_ecommerce/screens/home/home_form.dart';
 import 'package:flutter_ecommerce/icon_btn.dart';
@@ -13,6 +14,9 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User? user;
+    print('this is $user');
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,

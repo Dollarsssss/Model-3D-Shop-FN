@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/constants.dart';
+import 'package:flutter_ecommerce/models/user.dart';
+import 'package:flutter_ecommerce/screens/sign_in/sign_in_form.dart';
+import 'package:provider/provider.dart';
+
 
 class OrderList extends StatefulWidget {
   const OrderList({super.key});
@@ -19,10 +23,24 @@ String formatString(String str) {
 }
 
 class _OrderListState extends State<OrderList> {
+
   bool isSelected = false;
+  String? fname;
+  String? lname;
+  String? phone;
+  String? address;
+  String? email;
+
+    @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+ 
+    final user = Provider.of<UserModel>(context);
+    User? users = user.user;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -65,17 +83,17 @@ class _OrderListState extends State<OrderList> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 25,
                                     color: kPrimaryColor)),
-                            const Text(
-                              "Aomsup Pongpan",
-                              style: TextStyle(
+                             Text(
+                              "${users?.fname} ${users?.lname}",
+                              style: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
-                            const Text("092-874-8794",
-                                style: TextStyle(
+                             Text("${users?.phone}",
+                                style: const TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
                             Text(
                               formatString(
-                                  '811 Forest Oak RPCH Wat Nawong Suntorlapon'),
+                                  '${users?.address}'),
                               style: const TextStyle(
                                   fontSize: 13.7,
                                   fontWeight: FontWeight.w400,

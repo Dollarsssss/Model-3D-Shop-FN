@@ -3,6 +3,7 @@ import 'package:flutter_ecommerce/screens/cart/cart_screen.dart';
 import 'package:flutter_ecommerce/screens/complete_signup/complete_signup_screen.dart';
 import 'package:flutter_ecommerce/screens/home/home_screen.dart';
 import 'package:flutter_ecommerce/screens/order/order_screen.dart';
+import 'package:flutter_ecommerce/screens/payment/payment_screen.dart';
 import 'package:flutter_ecommerce/screens/profile/profile_screen.dart';
 import 'package:flutter_ecommerce/screens/profile_update/profile_update_screen.dart';
 import 'package:flutter_ecommerce/screens/sign_in/sign_in_screen.dart';
@@ -24,4 +25,5 @@ final Map<String , WidgetBuilder> routes = {
   Cart.routeName:(context) =>  const Cart(),
   ProfileUpdate.routeName:(context)=> const ProfileUpdate(),
   Order.routeName:(context)=> const Order(),
+  Payment.routeName:(context)=> const Payment(),
 };

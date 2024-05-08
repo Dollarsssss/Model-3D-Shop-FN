@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/defualt_button.dart';
 import 'package:flutter_ecommerce/screens/order/order_screen.dart';
-import 'package:flutter_ecommerce/screens/payment/payment_screen.dart';
 
-class OrderButton extends StatefulWidget {
-  const OrderButton({
+class PaymentButton extends StatefulWidget {
+  const PaymentButton({
     super.key,
   });
 
   @override
-  State<OrderButton> createState() => _OrderButtonState();
+  State<PaymentButton> createState() => _PaymentButtonState();
 
 }
 
 
-  class _OrderButtonState extends State<OrderButton> {
+  class _PaymentButtonState extends State<PaymentButton> {
   @override
   Widget build(BuildContext context) {
 
@@ -39,9 +38,9 @@ class OrderButton extends StatefulWidget {
                    SizedBox(
                     width: 220,
                     child: DefaultButton(
-                      text: "Paymant",
+                      text: "Order Placed",
                       press: (){
-                        Navigator.pushNamed(context, Payment.routeName);
+                        Navigator.pushNamed(context, Order.routeName);
                       },
                     ),
                     ),

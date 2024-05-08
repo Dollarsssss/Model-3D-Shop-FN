@@ -167,7 +167,7 @@ class _CompleteSignUpFormState extends State<CompleteSignUpForm> {
           decoration: const InputDecoration(
               labelText: "Address",
               hintText: "Enter your Address",
-              suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/User.svg")),
+              suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/Location point.svg")),
         );
     }
 

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/screens/order/order_list.dart';
+import 'package:flutter_ecommerce/screens/payment/payment_list.dart';
 
-class OrderForm extends StatefulWidget {
-  const OrderForm({super.key});
+class PaymentForm extends StatefulWidget {
+  const PaymentForm({super.key});
 
   @override
-  State<OrderForm> createState() => _OrderFormState();
+  State<PaymentForm> createState() => _PaymentFormState();
 }
 
-class _OrderFormState extends State<OrderForm> {
+class _PaymentFormState extends State<PaymentForm> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,10 +33,10 @@ class _OrderFormState extends State<OrderForm> {
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.add_circle_outline,size: 30,color: Colors.black,),
+                      Icon(Icons.credit_card_rounded,size: 30,color: Colors.black,),
                       SizedBox(width: 20,),
                       Text(
-                        "Add New Address",
+                        "Add New Card",
                         style:TextStyle(fontSize: 20, color: Colors.black,fontWeight: FontWeight.bold),
                       ),
                       
@@ -45,7 +45,7 @@ class _OrderFormState extends State<OrderForm> {
                 ),
               ),
             const SizedBox(height: 40,),
-            const OrderList(),
+            const PaymentList()
           ],
         ),
       )

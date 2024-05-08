@@ -5,6 +5,7 @@ import 'package:flutter_ecommerce/components/custom_suffix.icon.dart';
 import 'package:flutter_ecommerce/components/defualt_button.dart';
 import 'package:flutter_ecommerce/components/form_error.dart';
 import 'package:flutter_ecommerce/constants.dart';
+import 'package:flutter_ecommerce/models/user.dart';
 import 'package:flutter_ecommerce/screens/profile_update/prifile_update_pic.dart';
 import 'package:flutter_ecommerce/screens/sign_in/sign_in_form.dart';
 import 'package:flutter_ecommerce/screens/sign_in/sign_in_screen.dart';
@@ -34,14 +35,28 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
   String address = "";
   String img64 = "";
   bool imageUpload = false;
+ 
 
   final List<String> errors = [];
 
   @override
   void initState() {
     super.initState();
-    fetchProfile();
-    
+    final user = Provider.of<UserModel>(context, listen: false);
+    User? users = user.user;
+    email = users?.email;
+      if (users!.avatar.startsWith('https')) {
+      // ถ้าเป็น URL
+      setState(() {
+        images = Image.network(users!.avatar);
+      });
+    } else {
+      // ถ้าเป็น base64 string
+      Uint8List bytes = base64Decode(users!.avatar);
+      setState(() {
+        images = Image.memory(bytes);
+      });
+    }
   }
     
   void addError({required String error}){
@@ -61,41 +76,10 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
   }
 
 
-  Future<void> fetchProfile() async {
-    final url = Uri.parse('http://192.168.1.9:3000/users');
-    final headers = {'Content-Type': 'application/json'};
-
-    final response = await http.get(url, headers: headers);
-
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      final user = data.firstWhere((item) => item['email'] == email);
-
-
-      if (user['avatar'].startsWith('https')) {
-        // ถ้าเป็น URL
-        setState(() {
-          images = Image.network(user['avatar']);
-        });
-      } else {
-        // ถ้าเป็น base64 string
-        Uint8List bytes = base64Decode(user['avatar']);
-        setState(() {
-          images = Image.memory(bytes);
-        });
-      }
-
-      print("OK State: ${response.statusCode}'");
-    } else {
-      print('Failed to load data: ${response.statusCode}');
-    }
-  }
-
-Future<void> updateProfile(String email, String fname, String lname, String phone, String avatar) async {
+Future<void> updateProfile(String fname, String lname, String phone, String avatar ,String address ,String email,) async {
   final url = Uri.parse('http://192.168.1.9:3000/update_profile');
   final headers = {'Content-Type': 'application/json'};
-
+  
   final body = jsonEncode({
     'fname': fname,
     'lname': lname,
@@ -104,6 +88,7 @@ Future<void> updateProfile(String email, String fname, String lname, String phon
     'address': address,
     'email': email,
   });
+   print("update profile $fname,$lname,$phone, $address ,$avatar $email!,");
 
   final response = await http.put(url, headers: headers, body: body);
 
@@ -116,9 +101,7 @@ Future<void> updateProfile(String email, String fname, String lname, String phon
 
   @override
   Widget build(BuildContext context) {
-   final emailModel = Provider.of<EmailModel>(context);
-   email = emailModel.email;
-
+   
     return Form(
       key: _formkey,
       child: SingleChildScrollView(
@@ -162,7 +145,7 @@ Future<void> updateProfile(String email, String fname, String lname, String phon
                                   TextButton(
                                       child: Text('Submit'),
                                       onPressed: () {
-                                          updateProfile(email!,firstname,lastname,phone,img64,);
+                                          updateProfile(firstname,lastname,phone,img64,address,email!);
                                           Navigator.pushNamed(context, SignIn.routeName);
                                       },
                                   ),
@@ -218,7 +201,7 @@ Future<void> updateProfile(String email, String fname, String lname, String phon
       );
     }
 
-      TextFormField buildAddressFormField() {
+    TextFormField buildAddressFormField() {
     return TextFormField(
           onSaved: (newValue) => address = newValue as String,
            onChanged: (value) {
@@ -241,7 +224,7 @@ Future<void> updateProfile(String email, String fname, String lname, String phon
           decoration: const InputDecoration(
               labelText: "Address",
               hintText: "Enter your Address",
-              suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/User.svg")),
+              suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/Location point.svg")),
         );
     }
 

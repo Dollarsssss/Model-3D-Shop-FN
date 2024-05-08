@@ -5,8 +5,7 @@ class Product {
   final String image, title, description , quality , model;
   final int size, id, color;
   final double price;
- 
-  // final Color color;
+
 
   Product(
     {
@@ -56,6 +55,7 @@ class Product {
 
   }
 }
+
 
  List<Product> products = [];
 
