@@ -22,7 +22,6 @@ class _CartItemCardState extends State<CartItemCard> {
 
   @override
   Widget build(BuildContext context) {
-
     return Row(
       children: [
         SizedBox(

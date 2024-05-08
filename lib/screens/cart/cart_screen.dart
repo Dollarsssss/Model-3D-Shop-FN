@@ -21,7 +21,6 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     var cart = Provider.of<CartAdd>(context);
     var numberItem = cart.items.length;
-    
     return Scaffold(
       appBar: AppBar(
         title: Column(

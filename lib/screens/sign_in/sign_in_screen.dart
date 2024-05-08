@@ -16,10 +16,10 @@ class SignIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("Sign In",
         style: TextStyle(color: Color(0XFF8B8B8B), fontSize: 18)),
         centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SafeArea(
           child: SizedBox(

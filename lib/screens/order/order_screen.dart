@@ -15,7 +15,8 @@ class Order extends StatefulWidget {
 class _OrderState extends State<Order> {
  @override
   Widget build(BuildContext context) {
-
+    final double alltotal = ModalRoute.of(context)?.settings.arguments as double;
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -25,7 +26,7 @@ class _OrderState extends State<Order> {
         centerTitle: true,
       ),
       body: OrderForm(),
-      bottomNavigationBar: OrderButton(),
+      bottomNavigationBar: OrderButton(alltotal: alltotal,),
     );
   }
 }

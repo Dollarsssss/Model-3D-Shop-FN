@@ -174,18 +174,18 @@ Future<void> updateProfile(String fname, String lname, String phone, String avat
           final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
           if (pickedFile != null) {
 
-              final dir = await getTemporaryDirectory();
-              final targetPath = '${dir.absolute.path}/temp.jpg';
-
+            final dir = await getTemporaryDirectory();
+            final targetPath = '${dir.absolute.path}/temp.jpg';
+              
             // บีบอัด
             final result = await FlutterImageCompress.compressAndGetFile(
               pickedFile.path,
               targetPath,
               quality: 10,
             );
-
             final bytes = await result?.readAsBytes();
             img64 = base64Encode(bytes!);
+
             Uint8List bytess = base64Decode(img64);
             setState(() {
               images = Image.memory(bytess);

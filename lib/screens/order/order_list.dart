@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/constants.dart';
 import 'package:flutter_ecommerce/models/user.dart';
+import 'package:flutter_ecommerce/screens/payment/payment_list.dart';
 import 'package:flutter_ecommerce/screens/sign_in/sign_in_form.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +23,18 @@ String formatString(String str) {
   return newStr;
 }
 
+class SelectedAddress extends ChangeNotifier {
+  bool _selected = false;
+
+  bool get selected => _selected;
+
+  void setSeleted(bool selected) {
+    _selected = selected;
+    notifyListeners();
+  }
+  
+}
+
 class _OrderListState extends State<OrderList> {
 
   bool isSelected = false;
@@ -35,19 +48,18 @@ class _OrderListState extends State<OrderList> {
   void initState() {
     super.initState();
   }
-
+  
   @override
   Widget build(BuildContext context) {
  
     final user = Provider.of<UserModel>(context);
     User? users = user.user;
-    return GestureDetector(
-      onTap: () {
+       Future.delayed(Duration.zero, () { //รอ widget build เสร็จค่อยส่งข้อมูล
         setState(() {
-          isSelected = !isSelected;
+          Provider.of<SelectedAddress>(context, listen: false).setSeleted(isSelected);
         });
-      },
-      child: Column(
+      });
+    return Column(
         children: [
           Container(
             color: isSelected ? Colors.lightBlue[50] : Colors.transparent,
@@ -57,6 +69,7 @@ class _OrderListState extends State<OrderList> {
                   onTap: () {
                     setState(() {
                       isSelected = !isSelected;
+                         print(isSelected);
                     });
                   },
                   shape: RoundedRectangleBorder(
@@ -78,7 +91,7 @@ class _OrderListState extends State<OrderList> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("My Home",
+                            const Text("Home",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 25,
@@ -120,30 +133,31 @@ class _OrderListState extends State<OrderList> {
                       child: Icon(Icons.check, color: Colors.white),
                     ),
                   ),
-                if (isSelected) 
-                Positioned(
-                  right: 15,
-                  bottom: 15,
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: IconButton(
-                      color: Colors.white,
-                      icon: const Icon(Icons.delete),
-                      iconSize: 13,
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
+            
               ],
             ),
           ),
           SizedBox(height: 10),
         ],
-      ),
-    );
+      );
   }
 }
+    // ปุ่มลบค่อยใส่
+    // if (isSelected) 
+    //             Positioned(
+    //               right: 15,
+    //               bottom: 15,
+    //               child: Container(
+    //                 height: 30,
+    //                 width: 30,
+    //                 decoration: BoxDecoration(
+    //                     color: Colors.red,
+    //                     borderRadius: BorderRadius.circular(5)),
+    //                 child: IconButton(
+    //                   color: Colors.white,
+    //                   icon: const Icon(Icons.delete),
+    //                   iconSize: 13,
+    //                   onPressed: () {},
+    //                 ),
+    //               ),
+    //             ),

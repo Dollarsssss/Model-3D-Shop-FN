@@ -13,8 +13,10 @@ class Payment extends StatefulWidget {
 }
 
 class _PaymentState extends State<Payment> {
+  
  @override
   Widget build(BuildContext context) {
+ final double alltotal = ModalRoute.of(context)?.settings.arguments as double;
 
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +27,7 @@ class _PaymentState extends State<Payment> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(child: PaymentForm()),
-      bottomNavigationBar: PaymentButton(),
+      bottomNavigationBar: PaymentButton(alltotal: alltotal),
     );
   }
 }

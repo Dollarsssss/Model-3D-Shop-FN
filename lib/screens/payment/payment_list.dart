@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/custom_suffix.icon.dart';
 
@@ -11,29 +11,29 @@ class PaymentList extends StatefulWidget {
   State<PaymentList> createState() => _PaymentListState();
 }
 
+class SelectedPaymant extends ChangeNotifier {
+  String _selected= '';
+
+  String get selected => _selected;
+
+  void setSeleted(String selected) {
+    _selected = selected;
+    notifyListeners();
+  }
+  
+}
+
 class _PaymentListState extends State<PaymentList> {
-  String? _groupValue;
+  String _groupValue='';
   String? numberCard;
-  final List<String> errors = [];
-
-  void addError({required String error}) {
-    if (!errors.contains(error)) {
-      setState(() {
-        errors.add(error);
-      });
-    }
-  }
-
-  void removeError({required String error}) {
-    if (errors.contains(error)) {
-      setState(() {
-        errors.remove(error);
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+        Future.delayed(Duration.zero, () { //รอ widget build เสร็จค่อยส่งข้อมูล
+        setState(() {
+          Provider.of<SelectedPaymant>(context, listen: false).setSeleted(_groupValue);
+        });
+      });
     return Column(
       children: [
         const Row(
@@ -56,9 +56,9 @@ class _PaymentListState extends State<PaymentList> {
               onChanged: (value) {
                 setState(() {
                   if (_groupValue == value) {
-                    _groupValue = null;
+                    _groupValue = '';
                   } else {
-                    _groupValue = value;
+                    _groupValue = value!;
                   }
                 });
               },
@@ -103,9 +103,9 @@ class _PaymentListState extends State<PaymentList> {
               onChanged: (value) {
                 setState(() {
                   if (_groupValue == value) {
-                    _groupValue = null;
+                    _groupValue = '';
                   } else {
-                    _groupValue = value;
+                    _groupValue = value!;
                   }
                 });
               },

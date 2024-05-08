@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/defualt_button.dart';
 import 'package:flutter_ecommerce/screens/cart/cart_form.dart';
+import 'package:flutter_ecommerce/screens/details/add_to_cart.dart';
 import 'package:flutter_ecommerce/screens/order/order_screen.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -134,7 +135,7 @@ class _CheckOurCardState extends State<CheckOurCard> {
                     text: "Check Our",
                     press: () {
                       if (alltotal > 0) {
-                        Navigator.pushNamed(context, Order.routeName);
+                        Navigator.pushNamed(context, Order.routeName ,arguments: alltotal);
                       } else {
                         showDialog(
                           context: context,

@@ -56,7 +56,7 @@ class CartAdd with ChangeNotifier {
     notifyListeners();
   }
 
-    void buyNow(BuildContext context,Product product, int numberItem) {
+  void buyNow(BuildContext context,Product product, int numberItem) {
 
     for (var item in _items) {
       if (item.product.id == product.id) {
@@ -81,13 +81,18 @@ class CartAdd with ChangeNotifier {
       }
   }
     _items.add(AddtoCart(product: product, numberItem: numberItem));
-     Navigator.pushNamed(context, Cart.routeName);
+    Navigator.pushReplacementNamed(context, Cart.routeName);
     notifyListeners();
   }
     void removeItem(int productId) {
     _items.removeWhere((item) => item.product.id == productId);
     notifyListeners();
   }
+
+  void clearCart() {
+  _items.clear();
+  notifyListeners();
+}
 
 }
 
@@ -160,7 +165,6 @@ class _AddtoCartState extends State<AddtoCart> {
                     ),
                     onPressed: () {
                        Provider.of<CartAdd>(context, listen: false).buyNow(context,widget.product,widget.numberItem);
-                 
                     },
                     child: Text(
                       "Buy Now".toUpperCase(),

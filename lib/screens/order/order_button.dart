@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/defualt_button.dart';
-import 'package:flutter_ecommerce/screens/order/order_screen.dart';
+import 'package:flutter_ecommerce/screens/order/order_list.dart';
 import 'package:flutter_ecommerce/screens/payment/payment_screen.dart';
+import 'package:provider/provider.dart';
 
 class OrderButton extends StatefulWidget {
   const OrderButton({
-    super.key,
+    super.key, required this.alltotal,
   });
-
+  final double alltotal; 
   @override
   State<OrderButton> createState() => _OrderButtonState();
 
 }
-
-
   class _OrderButtonState extends State<OrderButton> {
   @override
   Widget build(BuildContext context) {
 
-
+   var select =Provider.of<SelectedAddress>(context);
+ 
     return Container(
       padding:const EdgeInsets.symmetric(vertical: 15,horizontal: 30),
       decoration: BoxDecoration(color: Colors.white,
@@ -41,7 +41,29 @@ class OrderButton extends StatefulWidget {
                     child: DefaultButton(
                       text: "Paymant",
                       press: (){
-                        Navigator.pushNamed(context, Payment.routeName);
+                        if(select.selected == true){
+                          print(widget.alltotal);
+                        Navigator.pushNamed(context, Payment.routeName,arguments: widget.alltotal);
+                        }else{
+                           print(select.selected);
+                          showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Notification'),
+                              content: Text('Please Select Address.'),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: Text('Close'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                        }
                       },
                     ),
                     ),

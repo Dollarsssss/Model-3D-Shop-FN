@@ -32,8 +32,6 @@ class AllItemPrice extends ChangeNotifier {
 }
 
 
-
-
 class _CartFormState extends State<CartForm> {
   @override
   Widget build(BuildContext context) {
@@ -60,8 +58,8 @@ class _CartFormState extends State<CartForm> {
       totalPrices.add(item.product.price * item.numberItem);
       Future.microtask(() => allItemPrice.addItemPrice(item.product.price * item.numberItem));
       //Future.microtas เลื่อนการทำงานไปจนกว่าการสร้าง widget จะเสร็จสิ้น ไม่งั้นจะทำให้การ render ช้าลง
+    
     });
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: ListView.builder(

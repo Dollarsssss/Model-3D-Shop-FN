@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/screens/details/add_to_cart.dart';
 import 'package:flutter_ecommerce/screens/profile/profile_menu.dart';
 import 'package:flutter_ecommerce/screens/profile/profile_picture.dart';
 import 'package:flutter_ecommerce/screens/profile_update/profile_update_screen.dart';
 import 'package:flutter_ecommerce/screens/sign_in/sign_in_screen.dart';
+import 'package:provider/provider.dart';
 
 class ProfileForm extends StatefulWidget {
   const ProfileForm({super.key});
@@ -55,6 +57,7 @@ class _ProfileFormState extends State<ProfileForm> {
                                 TextButton(
                                     child: Text('Submit'),
                                     onPressed: () {
+                                        Provider.of<CartAdd>(context, listen: false).clearCart();
                                         Navigator.pushNamed(context, SignIn.routeName);
                                     },
                                 ),
