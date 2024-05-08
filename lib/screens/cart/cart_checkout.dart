@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/defualt_button.dart';
 import 'package:flutter_ecommerce/screens/cart/cart_form.dart';
-import 'package:flutter_ecommerce/screens/details/add_to_cart.dart';
 import 'package:flutter_ecommerce/screens/order/order_screen.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';

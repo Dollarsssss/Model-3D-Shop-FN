@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/defualt_button.dart';
-import 'package:flutter_ecommerce/screens/order/order_screen.dart';
+import 'package:flutter_ecommerce/models/user.dart';
+import 'package:flutter_ecommerce/screens/cart/cart_item_card.dart';
 import 'package:flutter_ecommerce/screens/payment/payment_list.dart';
+import 'package:flutter_ecommerce/screens/sign_in/sign_in_form.dart';
 import 'package:provider/provider.dart';
 
 class PaymentButton extends StatefulWidget {
@@ -19,6 +21,9 @@ class _PaymentButtonState extends State<PaymentButton> {
   @override
   Widget build(BuildContext context) {
     final select = Provider.of<SelectedPaymant>(context);
+    final allProducts = Provider.of<AllProducts>(context);
+    final user = Provider.of<UserModel>(context);
+    User? users = user.user;
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
@@ -46,7 +51,16 @@ class _PaymentButtonState extends State<PaymentButton> {
                     text: "Order Placed",
                     press: () {
                       if (select.selected.length > 0) {
-                        print("Can Order :${select.selected}");
+                        print("${select.selected}");
+                        allProducts.allProducts.forEach((element) {
+                        print(element.title);
+                        print(element.price);
+                        print(element.numberItem);
+                        print(element.numberItem);
+                      });
+                      print(widget.alltotal);
+                      print("${users?.address}");
+                      print("${users?.id}");
                       } else {
                         showDialog(
                           context: context,

@@ -19,4 +19,6 @@ class NewProduct {
       required this.numberItem
     }
   );
+
+  void add(NewProduct allProduct) {}
 }

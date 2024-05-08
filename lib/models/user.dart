@@ -3,9 +3,10 @@ import 'package:http/http.dart' as http;
 
 class User {
   final String email,fname, lname, phone, address,avatar;
-
+  final int id;
   User({
     required this.email,
+    required this.id,
     required this.fname,
     required this.lname,
     required this.phone,
@@ -26,6 +27,7 @@ class User {
       if (user is Map<String, dynamic>) {
         return User(
           email: user['email'],
+          id: user['user_id'],
           fname: user['fname'],
           lname: user['lname'],
           phone: user['phone'],

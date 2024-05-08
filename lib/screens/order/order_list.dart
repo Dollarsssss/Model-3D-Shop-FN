@@ -35,6 +35,7 @@ class SelectedAddress extends ChangeNotifier {
   
 }
 
+
 class _OrderListState extends State<OrderList> {
 
   bool isSelected = false;
@@ -51,7 +52,7 @@ class _OrderListState extends State<OrderList> {
   
   @override
   Widget build(BuildContext context) {
- 
+      
     final user = Provider.of<UserModel>(context);
     User? users = user.user;
        Future.delayed(Duration.zero, () { //รอ widget build เสร็จค่อยส่งข้อมูล

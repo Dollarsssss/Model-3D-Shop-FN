@@ -32,16 +32,21 @@ class AllItemPrice extends ChangeNotifier {
 }
 
 
+
 class _CartFormState extends State<CartForm> {
   @override
   Widget build(BuildContext context) {
     var cart = Provider.of<CartAdd>(context);
     var allItemPrice = Provider.of<AllItemPrice>(context);
+    var allProducts = Provider.of<AllProducts>(context);
+
     newproducts.clear();
     totalPrices.clear();
     allItemPrice.totalPrices.clear();
+    
 
     cart.items.forEach((item) {
+     
         NewProduct newProduct = NewProduct(
         id: item.product.id.toInt(),
         title: item.product.title.toString(),
@@ -60,6 +65,9 @@ class _CartFormState extends State<CartForm> {
       //Future.microtas เลื่อนการทำงานไปจนกว่าการสร้าง widget จะเสร็จสิ้น ไม่งั้นจะทำให้การ render ช้าลง
     
     });
+  
+   
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: ListView.builder(
@@ -85,6 +93,7 @@ class _CartFormState extends State<CartForm> {
               setState(() {
                 cart.removeItem(newproducts[index].id);
                 allItemPrice.removeItemPrice(index);
+                allProducts.removeAllProduct(index);
               });
             },
             child: CartItemCard(
