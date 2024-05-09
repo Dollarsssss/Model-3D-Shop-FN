@@ -32,7 +32,6 @@ class AllItemPrice extends ChangeNotifier {
 }
 
 
-
 class _CartFormState extends State<CartForm> {
   @override
   Widget build(BuildContext context) {

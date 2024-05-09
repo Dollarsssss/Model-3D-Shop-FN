@@ -26,8 +26,8 @@ Future<List<dynamic>> fetchInvoices(String userId) async {
 
   if (response.statusCode == 200) {
     var data = jsonDecode(response.body);
-    print(data); // คำสั่ง print ที่เพิ่มเข้ามา
     return data;
+    
   } else {
     throw Exception('Failed to load invoices');
   }
@@ -60,10 +60,8 @@ class _InvoiceState extends State<Invoice> {
               itemCount: invoice.data?.length,
               itemBuilder: (context, index) {
                 var totalInvoicePrice = 0.0;
-                var address;
                 for (var detail in invoice.data?[index]['details']) {
                   totalInvoicePrice += num.parse(detail['total_price']);
-                  address = detail['address'];
                 }
                 return ExpansionTile(
                   title: Text(
@@ -80,7 +78,8 @@ class _InvoiceState extends State<Invoice> {
                   )
                     ..add(
                       ListTile(
-                        title: Text('Total Invoice Price: $totalInvoicePrice \nAddress : $address'),
+                        title: Text('Total Invoice Price: $totalInvoicePrice'),
+                        subtitle: Text("Address : ${invoice.data?[index]['address']}"),
                       ),
                     ),
                 );

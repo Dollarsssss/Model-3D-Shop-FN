@@ -134,7 +134,7 @@ class _CheckOurCardState extends State<CheckOurCard> {
                     text: "Check Our",
                     press: () {
                       if (alltotal > 0) {
-                        Navigator.pushNamed(context, Order.routeName ,arguments: alltotal);
+                        Navigator.pushReplacementNamed(context, Order.routeName);
                       } else {
                         showDialog(
                           context: context,

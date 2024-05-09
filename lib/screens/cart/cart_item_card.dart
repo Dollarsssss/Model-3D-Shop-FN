@@ -30,6 +30,10 @@ class AllProducts extends ChangeNotifier {
     _allProducts.removeAt(index);
     notifyListeners();
   }
+      void clearCart() {
+      _allProducts.clear();
+      notifyListeners();
+    }
 }
 
 class _CartItemCardState extends State<CartItemCard> {

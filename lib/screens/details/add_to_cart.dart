@@ -89,13 +89,12 @@ class CartAdd with ChangeNotifier {
     notifyListeners();
   }
 
-  void clearCart() {
-  _items.clear();
-  notifyListeners();
-}
+    void clearCart() {
+    _items.clear();
+    notifyListeners();
+  }
 
 }
-
 
 class _AddtoCartState extends State<AddtoCart> {
  

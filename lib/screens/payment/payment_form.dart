@@ -11,41 +11,15 @@ class PaymentForm extends StatefulWidget {
 class _PaymentFormState extends State<PaymentForm> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 30),
+        padding: EdgeInsets.symmetric(horizontal: 30),
         child: Column(
           children: [
-              SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: TextButton(
-                  onPressed: () {},
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        ),
-                     side: const BorderSide(color: Color.fromARGB(255, 183, 176, 176)),
-                    backgroundColor: Colors.white,
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.credit_card_rounded,size: 30,color: Colors.black,),
-                      SizedBox(width: 20,),
-                      Text(
-                        "Add New Card",
-                        style:TextStyle(fontSize: 20, color: Colors.black,fontWeight: FontWeight.bold),
-                      ),
-                      
-                    ],
-                  ),
-                ),
-              ),
-            const SizedBox(height: 40,),
-            const PaymentList()
+             SizedBox(height: 40,),
+             PaymentList()
           ],
         ),
       )

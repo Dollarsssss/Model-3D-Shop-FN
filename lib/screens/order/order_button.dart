@@ -6,9 +6,9 @@ import 'package:provider/provider.dart';
 
 class OrderButton extends StatefulWidget {
   const OrderButton({
-    super.key, required this.alltotal,
+    super.key, 
   });
-  final double alltotal; 
+
   @override
   State<OrderButton> createState() => _OrderButtonState();
 
@@ -42,8 +42,7 @@ class OrderButton extends StatefulWidget {
                       text: "Paymant",
                       press: (){
                         if(select.selected == true){
-                          print(widget.alltotal);
-                        Navigator.pushNamed(context, Payment.routeName,arguments: widget.alltotal);
+                        Navigator.pushNamed(context, Payment.routeName);
                         }else{
                            print(select.selected);
                           showDialog(

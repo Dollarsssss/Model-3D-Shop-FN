@@ -38,6 +38,10 @@ class UserModel extends ChangeNotifier {
     _user = user;
     notifyListeners();
   }
+
+  void setAddress(String user){
+    _user?.address = user;
+  }
 }
 
 class _SignInFormState extends State<SignInForm> {

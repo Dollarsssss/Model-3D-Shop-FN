@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class User {
-  final String email,fname, lname, phone, address,avatar;
+  final String email,fname, lname, phone, avatar;
+  String address;
   final int id;
   User({
     required this.email,
