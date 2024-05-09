@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'package:flutter_ecommerce/constants.dart';
+import 'package:flutter_ecommerce/models/user.dart';
+import 'package:flutter_ecommerce/screens/sign_in/sign_in_form.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/bottom_nav.dart';
 import 'package:flutter_ecommerce/enums.dart';
+import 'package:provider/provider.dart';
 
 class Invoice extends StatefulWidget {
   const Invoice({super.key});
@@ -40,7 +43,9 @@ class _InvoiceState extends State<Invoice> {
   @override
   void initState() {
     super.initState();
-    String userId = '30002';
+    final user = Provider.of<UserModel>(context, listen: false);
+    User? users = user.user;
+    String userId = '${users?.id.toString()}';
     futureInvoices = fetchInvoices(userId);
   }
 
@@ -82,7 +87,7 @@ class _InvoiceState extends State<Invoice> {
                           child: Card(
                             child: ListTile(
                               title: Text(
-                                  'Name : ${invoice.data?[index]['details'][detailIndex]['product_name']}',style: TextStyle(fontWeight: FontWeight.bold , fontSize: 17),),
+                                  'Name : ${invoice.data?[index]['details'][detailIndex]['product_name']}',style: const TextStyle(fontWeight: FontWeight.bold , fontSize: 17),),
                               subtitle: Text(
                                   'Price : ${invoice.data?[index]['details'][detailIndex]['product_price']}   x${invoice.data?[index]['details'][detailIndex]['product_quantity']}'),
                             ),
@@ -101,7 +106,7 @@ class _InvoiceState extends State<Invoice> {
               },
             );
           } else if (invoice.hasError) {
-            return Text('${invoice.error}');
+            return Text('');
           }
           return const CircularProgressIndicator();
         },

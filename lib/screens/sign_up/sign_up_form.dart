@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/custom_suffix.icon.dart';
 import 'package:flutter_ecommerce/components/defualt_button.dart';
@@ -11,6 +13,8 @@ class SignUpForm extends StatefulWidget {
   @override
   State<SignUpForm> createState() => _SignUpFormState();
 }
+
+
 
 class _SignUpFormState extends State<SignUpForm> {
   final _formkey = GlobalKey<FormState>();
@@ -36,6 +40,39 @@ class _SignUpFormState extends State<SignUpForm> {
       });
     }
   }
+  
+  Future<void> _checkEmail() async {
+
+    final url = Uri.parse('http://192.168.1.9:3000/check-email');
+    final headers = {'Content-Type': 'application/json'};
+    final body = jsonEncode({
+      'email': email, 
+    });
+
+    final res = await http.post(url, headers: headers, body: body);
+
+      if (res.statusCode == 400) {
+        print('Email นี้ถูกใช้งานแล้ว');
+        ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar( content:Text('Email already exists')));
+    } else if (res.statusCode == 200) {
+        print('Email นี้สามารถใช้งานได้');
+           Navigator.pushNamed(
+                context,
+                CompleteSignUp.routeName,
+                arguments: {
+                  'email': email,
+                  'password': password,
+                },
+              );
+        //Navigator.pushNamed(context, SignUpSuccess.routeName);
+    } else {
+      
+        print('Status Code: ${res.statusCode}');
+        print('Response Body: ${res.body}');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,15 +94,11 @@ class _SignUpFormState extends State<SignUpForm> {
             if(_formkey.currentState!.validate()){
                 _formkey.currentState!.save();
                 print("True : Email is $email and this is $password and Confirm Password is $confirm_password");
-                Navigator.pushNamed(
-                context,
-                CompleteSignUp.routeName,
-                arguments: {
-                  'email': email,
-                  'password': password,
-                },
-              );
-            }else{print("Fasle : Email is $email and this is $password and Confirm Password is $confirm_password");}
+                 _checkEmail();
+             
+            }else{
+              print("Fasle : Email is $email and this is $password and Confirm Password is $confirm_password");
+              }
           }
         ),  
       ],

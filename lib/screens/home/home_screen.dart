@@ -5,7 +5,6 @@ import 'package:flutter_ecommerce/models/user.dart';
 import 'package:flutter_ecommerce/screens/cart/cart_screen.dart';
 import 'package:flutter_ecommerce/screens/home/home_form.dart';
 import 'package:flutter_ecommerce/icon_btn.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -24,9 +23,6 @@ class Home extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
         elevation: 0,
         actions:[
-          IconButton(
-            icon: SvgPicture.asset("assets/icons/search.svg",color: Colors.black,), onPressed: () {},
-          ),
           IconBtnWithCounter(
             svgSrc: "assets/icons/cart.svg",
             press: (){

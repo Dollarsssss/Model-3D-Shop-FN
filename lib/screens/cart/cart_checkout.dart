@@ -14,7 +14,6 @@ class CheckOurCard extends StatefulWidget {
   State<CheckOurCard> createState() => _CheckOurCardState();
 }
 
-String voucherCode = '';
 
 class _CheckOurCardState extends State<CheckOurCard> {
   @override
@@ -26,13 +25,6 @@ class _CheckOurCardState extends State<CheckOurCard> {
       alltotal += item;
     });
 
-    if (voucherCode == '1234') {
-      alltotal -= 100;
-    }
-    if (allItemPrice.totalPrices.isEmpty) {
-      alltotal = 0;
-      voucherCode = "";
-    }
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
@@ -79,9 +71,6 @@ class _CheckOurCardState extends State<CheckOurCard> {
                             TextButton(
                               child: const Text('Submit'),
                               onPressed: () {
-                                setState(() {
-                                  voucherCode = voucherController.text;
-                                });
                                 Navigator.of(context).pop();
                                 showDialog(
                                   context: context,
@@ -89,7 +78,7 @@ class _CheckOurCardState extends State<CheckOurCard> {
                                     return AlertDialog(
                                       title: const Text('Voucher Code Entered'),
                                       content:
-                                          const Text('You have entered 100.'),
+                                          const Text('Good luck with your'),
                                       actions: <Widget>[
                                         TextButton(
                                           child: const Text('OK'),
@@ -110,7 +99,7 @@ class _CheckOurCardState extends State<CheckOurCard> {
                   },
                   child: const Row(
                     children: <Widget>[
-                      Text("Add voucher code"),
+                      Text("Good luck"),
                       SizedBox(width: 10),
                       Icon(Icons.arrow_forward_ios,
                           size: 12, color: Colors.black),
@@ -140,11 +129,11 @@ class _CheckOurCardState extends State<CheckOurCard> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text('Notification'),
-                              content: Text('You have no products in your cart.'),
+                              title: const Text('Notification'),
+                              content: const Text('You have no products in your cart.'),
                               actions: <Widget>[
                                 TextButton(
-                                  child: Text('Close'),
+                                  child: const Text('Close'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },

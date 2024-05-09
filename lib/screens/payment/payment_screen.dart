@@ -25,7 +25,7 @@ class _PaymentState extends State<Payment> {
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pushReplacementNamed(context, Order.routeName),
         ),
       ),
