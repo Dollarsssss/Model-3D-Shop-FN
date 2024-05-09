@@ -34,6 +34,7 @@ class _PaymentButtonState extends State<PaymentButton> {
   @override
   void initState() {
     super.initState();
+    Provider.of<SelectedPaymant>(context,listen: false).setClear();
     final allProducts = Provider.of<AllProducts>(context, listen: false);
     allProducts.allProducts.forEach((element) {
       productName.add(element.title);
@@ -78,7 +79,8 @@ class _PaymentButtonState extends State<PaymentButton> {
     final select = Provider.of<SelectedPaymant>(context);
     final user = Provider.of<UserModel>(context);
     User? users = user.user;
-
+    print(select.selected);
+   
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
       decoration: BoxDecoration(
@@ -128,8 +130,9 @@ class _PaymentButtonState extends State<PaymentButton> {
                                   onPressed: () {
                                     _createOrder();
                                     Provider.of<CartAdd>(context, listen: false).clearCart();
-                                    Provider.of<AllProducts>(context, listen: false).clearCart();
-                                    Navigator.pushNamed(context, Home.routeName);
+                                    Provider.of<AllProducts>(context, listen: false).clearProduct();
+                                    Provider.of<SelectedPaymant>(context ,listen: false).setClear();
+                                    Navigator.pushReplacementNamed(context, Home.routeName);
                                   },
                                 ),
                               ],

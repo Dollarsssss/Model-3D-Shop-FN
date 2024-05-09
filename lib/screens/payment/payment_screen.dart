@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/screens/order/order_screen.dart';
 import 'package:flutter_ecommerce/screens/payment/payment_button.dart';
 import 'package:flutter_ecommerce/screens/payment/payment_form.dart';
 
@@ -19,14 +20,17 @@ class _PaymentState extends State<Payment> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-              "Payment",
-              style: TextStyle(color: Colors.black),
+        title: const Text( "Payment",
+        style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.pushReplacementNamed(context, Order.routeName),
+        ),
       ),
       body: const SingleChildScrollView(child: PaymentForm()),
-      bottomNavigationBar: PaymentButton(),
+      bottomNavigationBar: const PaymentButton(),
     );
   }
 }

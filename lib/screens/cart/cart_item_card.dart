@@ -30,7 +30,7 @@ class AllProducts extends ChangeNotifier {
     _allProducts.removeAt(index);
     notifyListeners();
   }
-      void clearCart() {
+      void clearProduct() {
       _allProducts.clear();
       notifyListeners();
     }

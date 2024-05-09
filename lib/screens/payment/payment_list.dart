@@ -20,7 +20,9 @@ class SelectedPaymant extends ChangeNotifier {
     _selected = selected;
     notifyListeners();
   }
-  
+  void setClear(){
+    _selected = '';
+  }
 }
 
 class _PaymentListState extends State<PaymentList> {
@@ -29,11 +31,7 @@ class _PaymentListState extends State<PaymentList> {
 
   @override
   Widget build(BuildContext context) {
-        Future.delayed(Duration.zero, () { //รอ widget build เสร็จค่อยส่งข้อมูล
-        setState(() {
-          Provider.of<SelectedPaymant>(context, listen: false).setSeleted(_groupValue);
-        });
-      });
+      Future.microtask(() => Provider.of<SelectedPaymant>(context, listen: false).setSeleted(_groupValue)) ;
     return Column(
       children: [
         const Row(

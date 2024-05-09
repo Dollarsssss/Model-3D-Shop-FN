@@ -17,7 +17,7 @@ class OrderButton extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
 
-   var select =Provider.of<SelectedAddress>(context);
+   var select = Provider.of<SelectedAddress>(context);
  
     return Container(
       padding:const EdgeInsets.symmetric(vertical: 15,horizontal: 30),
@@ -42,7 +42,7 @@ class OrderButton extends StatefulWidget {
                       text: "Paymant",
                       press: (){
                         if(select.selected == true){
-                        Navigator.pushNamed(context, Payment.routeName);
+                        Navigator.pushReplacementNamed(context, Payment.routeName);
                         }else{
                            print(select.selected);
                           showDialog(

@@ -12,10 +12,13 @@ class OrderForm extends StatefulWidget {
   State<OrderForm> createState() => _OrderFormState();
 }
 
-Future<void> updateAddress(String address ,String email,) async {
+Future<void> updateAddress(
+  String address,
+  String email,
+) async {
   final url = Uri.parse('http://192.168.1.9:3000/update_address');
   final headers = {'Content-Type': 'application/json'};
-  
+
   final body = jsonEncode({
     'address': address,
     'email': email,
@@ -31,79 +34,91 @@ Future<void> updateAddress(String address ,String email,) async {
 }
 
 class _OrderFormState extends State<OrderForm> {
-
-final addressController = TextEditingController();
-String? user;
+  final addressController = TextEditingController();
+  String? user;
 
   @override
   Widget build(BuildContext context) {
-    
-    var data =  Provider.of<UserModel>(context, listen: false);
+    var data = Provider.of<UserModel>(context, listen: false);
     user = data.user?.email;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
+    return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
         child: Column(
           children: [
-              SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: TextButton(
-                  onPressed: () {
-                       showDialog(
+            SizedBox(
+              width: double.infinity,
+              height: 56,
+              child: TextButton(
+                onPressed: () {
+                  showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                        return AlertDialog(
-                            title: const Text('Edit Address'),
-                            content: TextField(
-                              controller: addressController,
-                              maxLines: null,
-                              keyboardType: TextInputType.multiline,
-                              ),
-                            actions: <Widget>[
-                                TextButton(
-                                    child: const Text('Cancel'),
-                                    onPressed: () {
-                                        Navigator.of(context).pop();
-                                    },
-                                ),
-                                TextButton(
-                                    child:const Text('Submit'),
-                                    onPressed: () {
-                                      Provider.of<UserModel>(context, listen: false).setAddress(addressController.text);
-                                      updateAddress(addressController.text,user!);
-                                      Navigator.of(context).pop();
-                                    },
-                                ),
-                            ],
-                        );
-                    },
-                );
-                  },
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                      return AlertDialog(
+                        title: const Text('Edit Address'),
+                        content: TextField(
+                          controller: addressController,
+                          maxLines: null,
+                          keyboardType: TextInputType.multiline,
                         ),
-                     side: const BorderSide(color: Color.fromARGB(255, 183, 176, 176)),
-                    backgroundColor: Colors.white,
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text('Cancel'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          TextButton(
+                            child: const Text('Submit'),
+                            onPressed: () {
+                              if (addressController.text.trim().isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar( content:Text('Please enter your address')));
+                              } else {
+                                Provider.of<UserModel>(context, listen: false).setAddress(addressController.text);
+                                updateAddress(addressController.text, user!);
+                                Navigator.of(context).pop();
+                              }
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.add_circle_outline,size: 30,color: Colors.black,),
-                      SizedBox(width: 20,),
-                      Text(
-                        "Edit Your Address",
-                        style:TextStyle(fontSize: 20, color: Colors.black,fontWeight: FontWeight.bold),
-                      ),
-                      
-                    ],
-                  ),
+                  side: const BorderSide(
+                      color: Color.fromARGB(255, 183, 176, 176)),
+                  backgroundColor: Colors.white,
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add_circle_outline,
+                      size: 30,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      "Edit Your Address",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
               ),
-            const SizedBox(height: 40,),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
             const OrderList(),
           ],
         ),

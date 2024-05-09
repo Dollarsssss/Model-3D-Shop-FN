@@ -32,6 +32,9 @@ class SelectedAddress extends ChangeNotifier {
     notifyListeners();
   }
   
+  void clearAddresses() {
+    _selected = false;
+  }
 }
 
 
@@ -59,6 +62,7 @@ class _OrderListState extends State<OrderList> {
           Provider.of<SelectedAddress>(context, listen: false).setSeleted(isSelected);
         });
       });
+   
     return Column(
         children: [
           Container(

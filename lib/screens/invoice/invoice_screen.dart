@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_ecommerce/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/components/bottom_nav.dart';
@@ -63,25 +64,39 @@ class _InvoiceState extends State<Invoice> {
                 for (var detail in invoice.data?[index]['details']) {
                   totalInvoicePrice += num.parse(detail['total_price']);
                 }
-                return ExpansionTile(
-                  title: Text(
-                      'Invoice ID: ${invoice.data?[index]['invoice_id']}\nPayment via : ${invoice.data?[index]['payment']} '),
-                  subtitle: Text('Date: ${invoice.data?[index]['date']}'),
-                  children: List<Widget>.generate(
-                    invoice.data?[index]['details'].length,
-                    (detailIndex) => ListTile(
+                return Card(
+                  color: kPrimaryColor,
+                  shape: RoundedRectangleBorder( 
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ExpansionTile(
                       title: Text(
-                          'Product Name: ${invoice.data?[index]['details'][detailIndex]['product_name']}'),
-                      subtitle: Text(
-                          'Total Price: ${invoice.data?[index]['details'][detailIndex]['total_price']}'),
+                          'Invoice ID: ${invoice.data?[index]['invoice_id']}\nPayment via : ${invoice.data?[index]['payment']} ' ,style: const TextStyle(color: Colors.white ,fontSize: 20),),
+                      subtitle: Text('Date: ${invoice.data?[index]['date']}',style: const TextStyle(color: Colors.white, fontSize: 16)),
+                      children: List<Widget>.generate(
+                        invoice.data?[index]['details'].length,
+                        (detailIndex) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Card(
+                            child: ListTile(
+                              title: Text(
+                                  'Name : ${invoice.data?[index]['details'][detailIndex]['product_name']}',style: TextStyle(fontWeight: FontWeight.bold , fontSize: 17),),
+                              subtitle: Text(
+                                  'Price : ${invoice.data?[index]['details'][detailIndex]['product_price']}   x${invoice.data?[index]['details'][detailIndex]['product_quantity']}'),
+                            ),
+                          ),
+                        ),
+                      )
+                        ..add(
+                          ListTile(
+                            title: Text('Total Invoice Price: ${totalInvoicePrice.toStringAsFixed(2)}',style: const TextStyle(color: Colors.white, fontSize: 20)),
+                            subtitle: Text("Address : ${invoice.data?[index]['address']}",style: const TextStyle(color: Colors.white,fontSize: 16)),
+                          ),
+                        ),
                     ),
-                  )
-                    ..add(
-                      ListTile(
-                        title: Text('Total Invoice Price: $totalInvoicePrice'),
-                        subtitle: Text("Address : ${invoice.data?[index]['address']}"),
-                      ),
-                    ),
+                  ),
                 );
               },
             );
