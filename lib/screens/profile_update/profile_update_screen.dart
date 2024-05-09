@@ -18,7 +18,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
         title: const Text("Profile", style: TextStyle(color: Color(0XFF8B8B8B), fontSize: 25)),
         centerTitle: true,
       ),
-      body: Padding(
+      body: const Padding(
         padding: EdgeInsets.symmetric(vertical: 20),
         child: ProfileUpdateForm(),
       ), 

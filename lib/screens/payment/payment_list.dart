@@ -94,7 +94,7 @@ class _PaymentListState extends State<PaymentList> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             RadioListTile<String>(

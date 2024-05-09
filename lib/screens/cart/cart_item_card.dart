@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/constants.dart';
 import 'package:flutter_ecommerce/models/newproduct.dart';
-import 'package:flutter_ecommerce/models/product.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable

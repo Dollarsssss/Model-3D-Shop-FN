@@ -45,17 +45,17 @@ class _ProfileFormState extends State<ProfileForm> {
                     context: context,
                     builder: (BuildContext context) {
                         return AlertDialog(
-                            title: Text('Confirm to log out'),
-                            content: Text('Do you want to logout?'),
+                            title: const Text('Confirm to log out'),
+                            content: const Text('Do you want to logout?'),
                             actions: <Widget>[
                                 TextButton(
-                                    child: Text('Cancel'),
+                                    child: const Text('Cancel'),
                                     onPressed: () {
                                         Navigator.of(context).pop();
                                     },
                                 ),
                                 TextButton(
-                                    child: Text('Submit'),
+                                    child:const Text('Submit'),
                                     onPressed: () {
                                         Provider.of<CartAdd>(context, listen: false).clearCart();
                                         Navigator.pushNamed(context, SignIn.routeName);

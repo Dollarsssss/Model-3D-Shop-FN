@@ -16,7 +16,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProfileUpdateForm extends StatefulWidget {
-  ProfileUpdateForm({Key? key}) : super(key: key);
+  const ProfileUpdateForm({Key? key}) : super(key: key);
 
   @override
   _ProfileUpdateFormState createState() => _ProfileUpdateFormState();
@@ -48,11 +48,11 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
       if (users!.avatar.startsWith('https')) {
       // ถ้าเป็น URL
       setState(() {
-        images = Image.network(users!.avatar);
+        images = Image.network(users.avatar);
       });
     } else {
       // ถ้าเป็น base64 string
-      Uint8List bytes = base64Decode(users!.avatar);
+      Uint8List bytes = base64Decode(users.avatar);
       setState(() {
         images = Image.memory(bytes);
       });
@@ -88,7 +88,6 @@ Future<void> updateProfile(String fname, String lname, String phone, String avat
     'address': address,
     'email': email,
   });
-   print("update profile $fname,$lname,$phone, $address ,$avatar $email!,");
 
   final response = await http.put(url, headers: headers, body: body);
 
@@ -133,17 +132,17 @@ Future<void> updateProfile(String fname, String lname, String phone, String avat
                       context: context,
                       builder: (BuildContext context) {
                           return AlertDialog(
-                              title: Text('Update Profile'),
-                              content: Text('Do you want to update your profile? \nApplication may need to be restarted.'),
+                              title: const Text('Update Profile'),
+                              content: const Text('Do you want to update your profile? \nApplication may need to be restarted.'),
                               actions: <Widget>[
                                   TextButton(
-                                      child: Text('Cancel'),
+                                      child: const Text('Cancel'),
                                       onPressed: () {
                                           Navigator.of(context).pop();
                                       },
                                   ),
                                   TextButton(
-                                      child: Text('Submit'),
+                                      child: const Text('Submit'),
                                       onPressed: () {
                                           updateProfile(firstname,lastname,phone,img64,address,email!);
                                           Navigator.pushNamed(context, SignIn.routeName);

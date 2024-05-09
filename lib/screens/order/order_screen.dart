@@ -25,7 +25,7 @@ class _OrderState extends State<Order> {
         ),
         centerTitle: true,
       ),
-      body: OrderForm(),
+      body: const OrderForm(),
       bottomNavigationBar: OrderButton(alltotal: alltotal,),
     );
   }

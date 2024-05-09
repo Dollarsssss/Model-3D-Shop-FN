@@ -46,7 +46,7 @@ class IconBtnWithCounter extends StatelessWidget {
             child: Container(
               height: 22,
               width: 22,
-              decoration: BoxDecoration(color: Color(0xFFFF4848),
+              decoration: BoxDecoration(color: const  Color(0xFFFF4848),
               shape: BoxShape.circle,
               border: Border.all(width: 1.5,color: Colors.white)
               ),

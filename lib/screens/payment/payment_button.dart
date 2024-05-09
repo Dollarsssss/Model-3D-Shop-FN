@@ -50,27 +50,29 @@ class _PaymentButtonState extends State<PaymentButton> {
                   child: DefaultButton(
                     text: "Order Placed",
                     press: () {
-                      if (select.selected.length > 0) {
-                        print("${select.selected}");
+                      if (select.selected.isNotEmpty) {
+                      print("${users?.id}");
+                      DateTime now = DateTime.now();
+                      String date = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
                         allProducts.allProducts.forEach((element) {
                         print(element.title);
                         print(element.price);
                         print(element.numberItem);
-                        print(element.numberItem);
                       });
                       print(widget.alltotal);
                       print("${users?.address}");
-                      print("${users?.id}");
+                      print("${select.selected}");
+            
                       } else {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text('Notification'),
-                              content: Text('Please Select Payment Method.'),
+                              title: const Text('Notification'),
+                              content: const Text('Please Select Payment Method.'),
                               actions: <Widget>[
                                 TextButton(
-                                  child: Text('Close'),
+                                  child: const Text('Close'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },

@@ -20,5 +20,4 @@ class NewProduct {
     }
   );
 
-  void add(NewProduct allProduct) {}
 }

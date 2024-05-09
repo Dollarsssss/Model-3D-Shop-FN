@@ -76,7 +76,7 @@ class _SignInFormState extends State<SignInForm> {
             );
           });
           
-        Future.delayed(Duration(seconds: 3), () {
+        Future.delayed(const Duration(seconds: 3), () {
         // ปิด dialog
         Navigator.of(context).pop();
         // ไปหน้าถัดไป

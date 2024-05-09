@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/constants.dart';
 import 'package:flutter_ecommerce/models/user.dart';
-import 'package:flutter_ecommerce/screens/payment/payment_list.dart';
 import 'package:flutter_ecommerce/screens/sign_in/sign_in_form.dart';
 import 'package:provider/provider.dart';
 
@@ -70,7 +69,6 @@ class _OrderListState extends State<OrderList> {
                   onTap: () {
                     setState(() {
                       isSelected = !isSelected;
-                         print(isSelected);
                     });
                   },
                   shape: RoundedRectangleBorder(
@@ -80,7 +78,7 @@ class _OrderListState extends State<OrderList> {
                   ),
                   tileColor: const Color.fromARGB(255, 252, 252, 252),
                   title: Padding(
-                    padding: EdgeInsets.only(top: 13, bottom: 13),
+                    padding: const EdgeInsets.only(top: 13, bottom: 13),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -129,16 +127,16 @@ class _OrderListState extends State<OrderList> {
                       height: 25,
                       width: 25,
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 2, 30, 122),
+                          color: const Color.fromARGB(255, 2, 30, 122),
                           borderRadius: BorderRadius.circular(15)),
-                      child: Icon(Icons.check, color: Colors.white),
+                      child: const Icon(Icons.check, color: Colors.white),
                     ),
                   ),
             
               ],
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       );
   }

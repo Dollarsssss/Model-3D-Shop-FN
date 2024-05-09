@@ -38,7 +38,7 @@ class _CartState extends State<Cart> {
         centerTitle: true,
       ),
       body:const CartForm(),
-      bottomNavigationBar: CheckOurCard(),
+      bottomNavigationBar: const CheckOurCard(),
     );
   }
 }

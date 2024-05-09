@@ -50,11 +50,11 @@ class OrderButton extends StatefulWidget {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text('Notification'),
-                              content: Text('Please Select Address.'),
+                              title: const Text('Notification'),
+                              content: const Text('Please Select Address.'),
                               actions: <Widget>[
                                 TextButton(
-                                  child: Text('Close'),
+                                  child: const Text('Close'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },

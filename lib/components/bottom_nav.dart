@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/constants.dart';
 import 'package:flutter_ecommerce/enums.dart';
 import 'package:flutter_ecommerce/screens/home/home_screen.dart';
+import 'package:flutter_ecommerce/screens/invoice/invoice_screen.dart';
 import 'package:flutter_ecommerce/screens/profile/profile_screen.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -38,6 +39,13 @@ class BottomNav extends StatelessWidget {
             onPressed:(){
               Navigator.pushNamed(context, Home.routeName);
             },
+            ),
+          IconButton(
+            icon:SvgPicture.asset("assets/icons/Cash.svg",
+            color: MenuState.invoice == selectedMenu ? kPrimaryColor:inActiveIconColor),
+            onPressed:(){
+              Navigator.pushNamed(context, Invoice.routeName);
+            }
             ),
           IconButton(
             icon:SvgPicture.asset("assets/icons/User Icon.svg",

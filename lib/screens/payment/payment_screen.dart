@@ -26,7 +26,7 @@ class _PaymentState extends State<Payment> {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(child: PaymentForm()),
+      body: const SingleChildScrollView(child: PaymentForm()),
       bottomNavigationBar: PaymentButton(alltotal: alltotal),
     );
   }
