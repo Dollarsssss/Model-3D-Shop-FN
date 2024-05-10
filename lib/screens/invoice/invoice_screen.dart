@@ -78,7 +78,7 @@ class _InvoiceState extends State<Invoice> {
                     padding: const EdgeInsets.all(8.0),
                     child: ExpansionTile(
                       title: Text(
-                          'Invoice ID: ${invoice.data?[index]['invoice_id']}\nPayment via : ${invoice.data?[index]['payment']} ' ,style: const TextStyle(color: Colors.white ,fontSize: 20),),
+                          'Invoice ID: ${invoice.data?[index]['invoice_id']}\nPayment via : ${invoice.data?[index]['payment']} ' ,style: const TextStyle(color: Colors.white ,fontSize: 19.7),),
                       subtitle: Text('Date: ${invoice.data?[index]['date']}',style: const TextStyle(color: Colors.white, fontSize: 16)),
                       children: List<Widget>.generate(
                         invoice.data?[index]['details'].length,

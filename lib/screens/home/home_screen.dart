@@ -33,10 +33,7 @@ class Home extends StatelessWidget {
           const SizedBox(width:10)
         ],
       ),
-      body: const Padding(
-        padding:EdgeInsets.only(bottom: 20),
-        child: HomeForm(),
-      ),
+      body: HomeForm(),
       bottomNavigationBar:const BottomNav(selectedMenu: MenuState.home),
     );
   }

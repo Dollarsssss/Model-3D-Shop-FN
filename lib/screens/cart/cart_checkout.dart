@@ -25,7 +25,6 @@ class _CheckOurCardState extends State<CheckOurCard> {
       alltotal += item;
     });
 
-
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
       decoration: BoxDecoration(
@@ -71,14 +70,14 @@ class _CheckOurCardState extends State<CheckOurCard> {
                             TextButton(
                               child: const Text('Submit'),
                               onPressed: () {
+                            
                                 Navigator.of(context).pop();
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      title: const Text('Voucher Code Entered'),
-                                      content:
-                                          const Text('Good luck with your'),
+                                      title: Text("Goodddddd"),
+                                      content:Text("Goodluck with your"),
                                       actions: <Widget>[
                                         TextButton(
                                           child: const Text('OK'),

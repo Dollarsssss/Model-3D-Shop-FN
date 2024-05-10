@@ -34,21 +34,21 @@ class BottomNav extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
           IconButton(
-            icon:SvgPicture.asset("assets/icons/Shop Icon.svg" ,
+            icon:SvgPicture.asset("assets/icons/Shop Icon.svg" , height: 23,
             color: MenuState.home == selectedMenu ? kPrimaryColor:inActiveIconColor),
             onPressed:(){
               Navigator.pushNamed(context, Home.routeName);
             },
             ),
           IconButton(
-            icon:SvgPicture.asset("assets/icons/Cash.svg",
+            icon:SvgPicture.asset("assets/icons/Cash.svg", height: 22,
             color: MenuState.invoice == selectedMenu ? kPrimaryColor:inActiveIconColor),
             onPressed:(){
               Navigator.pushNamed(context, Invoice.routeName);
             }
             ),
           IconButton(
-            icon:SvgPicture.asset("assets/icons/User Icon.svg",
+            icon:SvgPicture.asset("assets/icons/User Icon.svg", height: 23,
             color: MenuState.profile == selectedMenu ? kPrimaryColor:inActiveIconColor),
             onPressed:(){
               Navigator.pushNamed(context, Profile.routeName);

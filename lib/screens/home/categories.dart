@@ -1,59 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/constants.dart';
+import 'package:flutter_ecommerce/models/product.dart';
+import 'package:flutter_ecommerce/screens/details/details.screen.dart';
+import 'package:flutter_ecommerce/screens/home/item_card.dart';
 
-class Categories extends StatefulWidget {
-  const Categories({super.key});
+class CategoryView extends StatelessWidget {
+  final String category;
 
-  @override
-  State<Categories> createState() => _CategoriesState();
-}
-
-class _CategoriesState extends State<Categories> {
-  List<String> categories = ["All Genaral", "Artis", "Animal Cartoon", "Old School"];
-  int selectedIndex = 0;
+  const CategoryView({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      child: SizedBox(
-        height: 25,
-        child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: categories.length,
-            itemBuilder: (context, index) => buildCategory(index)),
-      ),
-    );
+    List<Product> filteredProducts;
+    if (category == 'All') {
+      // แสดงสินค้าทั้งหมด
+      filteredProducts = products;
+    } else {
+      // กรองสินค้าตามคุณภาพ
+      filteredProducts = products.where((product) => product.quality == category).toList();
+    }
+    return buildProductGridView(filteredProducts);
   }
 
-  Widget buildCategory(int index) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedIndex = index;
-        });
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              categories[index],
-              style: TextStyle(
-                fontWeight: FontWeight.w600, 
-                fontSize: 17,
-                color: selectedIndex==index ? Colors.black:kTextLightColor
-                )
-            ),
-        
-            Container(
-              height: 1,
-              width: 30,
-              color: selectedIndex == index ? Colors.black:Colors.transparent,
-            )
-          ],
-        ),
+  Widget buildProductGridView(List<Product> products) {
+    return GridView.builder(
+      itemCount: products.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 20,
+        childAspectRatio: 0.75
+      ),
+      itemBuilder: (context, index) => ItemCard(
+        product: products[index],
+        press: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Detail(product: products[index])))
       ),
     );
   }

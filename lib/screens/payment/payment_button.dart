@@ -7,6 +7,7 @@ import 'package:flutter_ecommerce/screens/details/add_to_cart.dart';
 import 'package:flutter_ecommerce/screens/home/home_screen.dart';
 import 'package:flutter_ecommerce/screens/payment/payment_list.dart';
 import 'package:flutter_ecommerce/screens/sign_in/sign_in_form.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
@@ -128,11 +129,28 @@ class _PaymentButtonState extends State<PaymentButton> {
                                 TextButton(
                                   child: const Text('Submit'),
                                   onPressed: () {
-                                    _createOrder();
-                                    Provider.of<CartAdd>(context, listen: false).clearCart();
-                                    Provider.of<AllProducts>(context, listen: false).clearProduct();
-                                    Provider.of<SelectedPaymant>(context ,listen: false).setClear();
-                                    Navigator.pushReplacementNamed(context, Home.routeName);
+                                   _createOrder();
+                                   Provider.of<CartAdd>(context, listen: false).clearCart();
+                                   Provider.of<AllProducts>(context, listen: false).clearProduct();
+                                   Provider.of<SelectedPaymant>(context ,listen: false).setClear();
+                                        showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      content:Lottie.asset("assets/animations/order.json")
+                                    );
+                                  },
+                                );  
+                                 Future.delayed(const Duration(seconds: 3), () {
+                                  Navigator.of(context).pop();
+                                });
+                                  Future.delayed(const Duration(seconds: 3), () {
+                                  Navigator.of(context).pop(); // Close the confirm dialog
+                                });
+                                 Future.delayed(const Duration(seconds: 3), () {
+                                  Navigator.pushReplacementNamed(context, Home.routeName); // Close the confirm dialog
+                                });
+                               ;
                                   },
                                 ),
                               ],
